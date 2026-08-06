@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        /* Invoice Exact Styling (A4 Size) */
         .invoice-preview-container {
             width: 210mm;
             min-height: 297mm;
@@ -38,6 +37,7 @@
         }
         .header-table { width: 100%; margin-bottom: 30px; }
         .header-table td { vertical-align: middle; }
+        .logo-img { height: 60px; object-fit: contain; display: block; }
         .company-info { font-size: 12px; color: #444; margin-top: 5px; line-height: 1.5; }
         .invoice-label { text-align: right; font-size: 40px; font-weight: 800; color: #0b3d91; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
         .invoice-meta { text-align: right; font-size: 12px; color: #444; margin-top: 10px; line-height: 1.6; }
@@ -97,7 +97,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Billed To</label>
-                    <textarea id="invBilledTo" rows="3" class="mt-1 w-full border rounded p-2" oninput="updatePreview()">Company Name&#10;Address Line 1&#10;Address Line 2</textarea>
+                    <textarea id="invBilledTo" rows="3" class="mt-1 w-full border rounded p-2" oninput="updatePreview()">NEW KHYBER NAGINA GOODS TRANSPORT CO.&#10;GENERAL TRUCK STAND, RAVI LINK ROAD,&#10;LAHORE</textarea>
                 </div>
 
                 <div class="flex gap-4 border-t pt-4">
@@ -144,7 +144,7 @@
                         <table class="header-table">
                             <tr>
                                 <td style="width: 50%;">
-                                    <h1 style="color:#0b3d91; margin:0; font-size: 32px; font-weight:800; letter-spacing:2px;">COBITX</h1>
+                                    <img src="logo.png" alt="Cobitx Technologies" class="logo-img" onerror="this.outerHTML='<h1 style=\'color:#0b3d91; margin:0; font-size:32px;\'>COBITX</h1>'">
                                     <div class="company-info">
                                         <strong>Cobitx Technologies</strong><br>
                                         cobitx.com
@@ -165,8 +165,9 @@
                             <tr>
                                 <td>
                                     <div class="section-title">BILLED TO</div>
-                                    <div class="client-info" id="prevBilledTo">Company Name
-Address</div>
+                                    <div class="client-info" id="prevBilledTo">NEW KHYBER NAGINA GOODS TRANSPORT CO.
+GENERAL TRUCK STAND, RAVI LINK ROAD,
+LAHORE</div>
                                 </td>
                             </tr>
                         </table>
@@ -227,11 +228,9 @@ Address</div>
 
     <script>
         let items = [
-            { desc: 'Export Dashboard Development\nProject: Al Wahab Rice', cycle: 'One-Time', amount: 70 },
-            { desc: 'Domain Registration\nUK Domain extension', cycle: 'Annual', amount: 35 }
+            { desc: 'RoadX.pk Subscription fee', cycle: 'Monthly', amount: 10000 }
         ];
 
-        // Set default date to today
         document.getElementById('invDate').valueAsDate = new Date();
 
         function renderFormItems() {
@@ -301,7 +300,6 @@ Address</div>
             document.getElementById('prevCurrencyHead').innerText = curr;
             document.getElementById('prevSubCurrency').innerText = curr;
             
-            // Generate Table
             const tbody = document.getElementById('prevItemsBody');
             tbody.innerHTML = '';
             let subtotal = 0;
@@ -319,7 +317,6 @@ Address</div>
                 `;
             });
 
-            // Calculate Totals
             if (curr === 'USD') {
                 document.getElementById('prevSubtotal').innerText = `$${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
                 document.getElementById('prevRate').innerText = rate.toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -328,7 +325,7 @@ Address</div>
                 document.getElementById('prevTotal').innerText = `Rs ${totalPKR.toLocaleString()}`;
             } else {
                 document.getElementById('prevTotalCurrency').innerText = 'PKR';
-                document.getElementById('prevTotal').innerText = `PKR ${subtotal.toLocaleString()}`;
+                document.getElementById('prevTotal').innerText = `Rs ${subtotal.toLocaleString()}`;
             }
         }
 
@@ -350,7 +347,6 @@ Address</div>
             const element = document.getElementById('invoicePDF');
             const invNo = document.getElementById('invNo').value || 'Invoice';
             
-            // html2pdf options
             const opt = {
                 margin:       0,
                 filename:     `${invNo}.pdf`,
@@ -362,7 +358,6 @@ Address</div>
             html2pdf().set(opt).from(element).save();
         }
 
-        // Initialize on load
         renderFormItems();
         toggleExchangeRate();
     </script>
