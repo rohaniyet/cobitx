@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobitx Invoice Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* Invoice Exact Styling (A4 Size) */
+        .invoice-preview-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .invoice-body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+        }
+
+        .top-accent {
+            height: 8px;
+            width: 100%;
+            background: linear-gradient(90deg, #0b3d91 0%, #00d2ff 100%);
+        }
+        .invoice-wrapper {
+            padding: 15mm 20mm;
+            box-sizing: border-box;
+        }
+        .header-table { width: 100%; margin-bottom: 30px; }
+        .header-table td { vertical-align: middle; }
+        .company-info { font-size: 12px; color: #444; margin-top: 5px; line-height: 1.5; }
+        .invoice-label { text-align: right; font-size: 40px; font-weight: 800; color: #0b3d91; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+        .invoice-meta { text-align: right; font-size: 12px; color: #444; margin-top: 10px; line-height: 1.6; }
+        .grid-layout { width: 100%; margin-bottom: 30px; }
+        .grid-layout td { vertical-align: top; width: 50%; }
+        .section-title { font-size: 12px; text-transform: uppercase; color: #0b3d91; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; border-bottom: 2px solid #0b3d91; display: inline-block; padding-bottom: 3px; }
+        .client-info { font-size: 14px; line-height: 1.6; color: #1a1a1a; font-weight: 600; white-space: pre-wrap; }
+        
+        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #cbd5e1; }
+        .items-table th { text-align: left; font-size: 11px; text-transform: uppercase; background-color: #0b3d91; color: #ffffff; padding: 10px 15px; font-weight: 700; letter-spacing: 1px; }
+        .items-table td { padding: 12px 15px; font-size: 13px; border-bottom: 1px solid #cbd5e1; color: #1a1a1a; }
+        .items-table tbody tr:nth-child(even) { background-color: #f8fafc; }
+        .items-table th.amount, .items-table td.amount { text-align: right; font-weight: 600; }
+        .items-table th.center, .items-table td.center { text-align: center; }
+        .items-table td.desc { font-weight: 700; white-space: pre-wrap; }
+        
+        .bottom-section-table { width: 100%; margin-top: 10px; }
+        .bottom-section-table td { vertical-align: top; }
+        .payment-info { padding: 15px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; text-align: center; width: 220px; }
+        .qr-title { font-size: 11px; font-weight: 800; color: #0b3d91; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .qr-img { width: 110px; height: 110px; object-fit: cover; border: 4px solid #ffffff; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 10px; display: inline-block;}
+        .payment-text { font-size: 11px; color: #1a1a1a; font-weight: 700; line-height: 1.5; }
+        
+        .totals-table { width: 320px; float: right; border-collapse: collapse; border: 1px solid #cbd5e1; }
+        .totals-table td { padding: 10px 15px; font-size: 13px; color: #334155; border-bottom: 1px solid #cbd5e1; }
+        .totals-table .amount { text-align: right; font-weight: 700; color: #0f172a; }
+        .total-payable td { background-color: #0b3d91; color: #ffffff; font-size: 16px; font-weight: 800; border: none; }
+        .total-payable .amount { color: #ffffff; font-size: 18px; }
+        
+        .footer { clear: both; margin-top: 50px; font-size: 11px; color: #94a3b8; border-top: 1px solid #cbd5e1; padding-top: 15px; text-align: center; font-weight: 500; }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 font-sans">
+    
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
+        
+        <!-- CONTROL PANEL (Form) -->
+        <div class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md h-fit">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Invoice Generator</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Invoice #</label>
+                    <input type="text" id="invNo" class="mt-1 w-full border rounded p-2" value="INV-CBX-006" oninput="updatePreview()">
+                </div>
+                
+                <div class="flex gap-4">
+                    <div class="w-1/2">
+                        <label class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="invDate" class="mt-1 w-full border rounded p-2" onchange="updatePreview()">
+                    </div>
+                    <div class="w-1/2">
+                        <label class="block text-sm font-medium text-gray-700">Due Date</label>
+                        <input type="text" id="invDue" class="mt-1 w-full border rounded p-2" value="Upon Receipt" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Billed To</label>
+                    <textarea id="invBilledTo" rows="3" class="mt-1 w-full border rounded p-2" oninput="updatePreview()">Company Name&#10;Address Line 1&#10;Address Line 2</textarea>
+                </div>
+
+                <div class="flex gap-4 border-t pt-4">
+                    <div class="w-1/2">
+                        <label class="block text-sm font-medium text-gray-700">Currency</label>
+                        <select id="invCurrency" class="mt-1 w-full border rounded p-2" onchange="toggleExchangeRate(); updatePreview();">
+                            <option value="PKR">PKR</option>
+                            <option value="USD" selected>USD</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2" id="exchangeRateDiv">
+                        <label class="block text-sm font-medium text-gray-700">Exchange Rate</label>
+                        <input type="number" id="invRate" class="mt-1 w-full border rounded p-2" value="290" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-sm font-medium text-gray-700">Items</label>
+                        <button onclick="addItem()" class="bg-blue-500 text-white px-2 py-1 text-xs rounded hover:bg-blue-600">+ Add Item</button>
+                    </div>
+                    <div id="itemsContainer" class="space-y-2">
+                        <!-- Items will be generated here by JS -->
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <label class="block text-sm font-medium text-gray-700">Upload QR Code</label>
+                    <input type="file" id="qrUpload" accept="image/*" class="mt-1 w-full" onchange="loadQR(event)">
+                </div>
+
+                <button onclick="generatePDF()" class="w-full bg-green-600 text-white font-bold py-3 rounded mt-6 hover:bg-green-700">
+                    Export as PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- INVOICE PREVIEW -->
+        <div class="w-full lg:w-2/3 overflow-x-auto">
+            <div class="invoice-preview-container" id="invoicePDF">
+                <div class="invoice-body">
+                    <div class="top-accent"></div>
+                    <div class="invoice-wrapper">
+                        <table class="header-table">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <h1 style="color:#0b3d91; margin:0; font-size: 32px; font-weight:800; letter-spacing:2px;">COBITX</h1>
+                                    <div class="company-info">
+                                        <strong>Cobitx Technologies</strong><br>
+                                        cobitx.com
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <div class="invoice-label">INVOICE</div>
+                                    <div class="invoice-meta">
+                                        <strong>Invoice #:</strong> <span id="prevInvNo">INV-CBX-006</span><br>
+                                        <strong>Date:</strong> <span id="prevDate">August 6, 2026</span><br>
+                                        <strong>Due Date:</strong> <span id="prevDue">Upon Receipt</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="grid-layout">
+                            <tr>
+                                <td>
+                                    <div class="section-title">BILLED TO</div>
+                                    <div class="client-info" id="prevBilledTo">Company Name
+Address</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th class="center">Cycle</th>
+                                    <th class="amount">Amount (<span id="prevCurrencyHead">USD</span>)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prevItemsBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+
+                        <table class="bottom-section-table">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <div class="payment-info">
+                                        <div class="qr-title">Scan To Pay</div>
+                                        <img src="" id="prevQR" class="qr-img" style="display:none;" alt="QR Code">
+                                        <div id="qrPlaceholder" style="width:110px; height:110px; border:1px solid #ccc; display:inline-block; line-height:110px; color:#999; margin-bottom:10px;">Upload QR</div>
+                                        <div class="payment-text">
+                                            Please scan this QR code using your banking app to make the payment securely.
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <table class="totals-table">
+                                        <tr id="rowSubtotal">
+                                            <td>Subtotal (<span id="prevSubCurrency">USD</span>)</td>
+                                            <td class="amount" id="prevSubtotal">$0.00</td>
+                                        </tr>
+                                        <tr class="highlight-row" id="rowRate">
+                                            <td>Exchange Rate (PKR)</td>
+                                            <td class="amount" id="prevRate">290.00</td>
+                                        </tr>
+                                        <tr class="total-payable">
+                                            <td>Total Payable (<span id="prevTotalCurrency">PKR</span>)</td>
+                                            <td class="amount" id="prevTotal">Rs 0</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <div class="footer">
+                            This is a system generated document by Cobitx Technologies. No physical signature is required.<br>
+                            Thank you for your business.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let items = [
+            { desc: 'Export Dashboard Development\nProject: Al Wahab Rice', cycle: 'One-Time', amount: 70 },
+            { desc: 'Domain Registration\nUK Domain extension', cycle: 'Annual', amount: 35 }
+        ];
+
+        // Set default date to today
+        document.getElementById('invDate').valueAsDate = new Date();
+
+        function renderFormItems() {
+            const container = document.getElementById('itemsContainer');
+            container.innerHTML = '';
+            items.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="flex gap-2 bg-gray-50 p-2 rounded border items-center">
+                        <textarea class="w-1/2 p-1 border rounded text-xs" placeholder="Description" oninput="updateItem(${index}, 'desc', this.value)" rows="2">${item.desc}</textarea>
+                        <input type="text" class="w-1/4 p-1 border rounded text-xs" placeholder="Cycle" value="${item.cycle}" oninput="updateItem(${index}, 'cycle', this.value)">
+                        <input type="number" class="w-1/4 p-1 border rounded text-xs" placeholder="Amt" value="${item.amount}" oninput="updateItem(${index}, 'amount', this.value)">
+                        <button class="text-red-500 font-bold px-1" onclick="removeItem(${index})">X</button>
+                    </div>
+                `;
+            });
+            updatePreview();
+        }
+
+        function updateItem(index, key, value) {
+            items[index][key] = key === 'amount' ? (parseFloat(value) || 0) : value;
+            updatePreview();
+        }
+
+        function addItem() {
+            items.push({ desc: '', cycle: 'Monthly', amount: 0 });
+            renderFormItems();
+        }
+
+        function removeItem(index) {
+            items.splice(index, 1);
+            renderFormItems();
+        }
+
+        function toggleExchangeRate() {
+            const curr = document.getElementById('invCurrency').value;
+            const rateDiv = document.getElementById('exchangeRateDiv');
+            const rowSub = document.getElementById('rowSubtotal');
+            const rowRate = document.getElementById('rowRate');
+            
+            if(curr === 'PKR') {
+                rateDiv.style.display = 'none';
+                rowSub.style.display = 'none';
+                rowRate.style.display = 'none';
+            } else {
+                rateDiv.style.display = 'block';
+                rowSub.style.display = 'table-row';
+                rowRate.style.display = 'table-row';
+            }
+        }
+
+        function updatePreview() {
+            document.getElementById('prevInvNo').innerText = document.getElementById('invNo').value;
+            
+            const rawDate = document.getElementById('invDate').value;
+            if(rawDate) {
+                const dateObj = new Date(rawDate);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('prevDate').innerText = dateObj.toLocaleDateString('en-US', options);
+            }
+            
+            document.getElementById('prevDue').innerText = document.getElementById('invDue').value;
+            document.getElementById('prevBilledTo').innerText = document.getElementById('invBilledTo').value;
+
+            const curr = document.getElementById('invCurrency').value;
+            const rate = parseFloat(document.getElementById('invRate').value) || 1;
+            
+            document.getElementById('prevCurrencyHead').innerText = curr;
+            document.getElementById('prevSubCurrency').innerText = curr;
+            
+            // Generate Table
+            const tbody = document.getElementById('prevItemsBody');
+            tbody.innerHTML = '';
+            let subtotal = 0;
+            
+            const currSymbol = curr === 'USD' ? '$' : 'PKR ';
+
+            items.forEach(item => {
+                subtotal += item.amount;
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="desc">${item.desc}</td>
+                        <td class="center">${item.cycle}</td>
+                        <td class="amount">${currSymbol}${item.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                    </tr>
+                `;
+            });
+
+            // Calculate Totals
+            if (curr === 'USD') {
+                document.getElementById('prevSubtotal').innerText = `$${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+                document.getElementById('prevRate').innerText = rate.toLocaleString(undefined, {minimumFractionDigits: 2});
+                const totalPKR = subtotal * rate;
+                document.getElementById('prevTotalCurrency').innerText = 'PKR';
+                document.getElementById('prevTotal').innerText = `Rs ${totalPKR.toLocaleString()}`;
+            } else {
+                document.getElementById('prevTotalCurrency').innerText = 'PKR';
+                document.getElementById('prevTotal').innerText = `PKR ${subtotal.toLocaleString()}`;
+            }
+        }
+
+        function loadQR(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('prevQR');
+                    img.src = e.target.result;
+                    img.style.display = 'inline-block';
+                    document.getElementById('qrPlaceholder').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function generatePDF() {
+            const element = document.getElementById('invoicePDF');
+            const invNo = document.getElementById('invNo').value || 'Invoice';
+            
+            // html2pdf options
+            const opt = {
+                margin:       0,
+                filename:     `${invNo}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // Initialize on load
+        renderFormItems();
+        toggleExchangeRate();
+    </script>
+</body>
+</html>
