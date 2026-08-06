@@ -5,17 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cobitx Invoice Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- html2pdf hata diya gaya hai. Direct html2canvas + jsPDF, taake paging par poora control ho. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
+        /*
+          A4 @ 96dpi = 794 x 1123 px.
+          mm ki jagah px use kar rahe hain taake canvas <-> PDF mapping 1:1 rahe
+          aur rounding se extra blank page na bane.
+        */
+        :root {
+            --page-w: 794px;
+            --page-h: 1123px;
+            --brand: #0b3d91;
+        }
+
         .invoice-preview-container {
-            width: 210mm;
-            height: 297mm;
-            background: white;
+            width: var(--page-w);
+            min-height: var(--page-h);   /* fixed height nahi -> lamba invoice grow kar sakta hai */
+            background: #ffffff;
             margin: 0;
             position: relative;
             box-sizing: border-box;
+            box-shadow: 0 2px 12px rgba(0,0,0,.12);
         }
-        
+
         .invoice-body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: #1a1a1a;
@@ -23,7 +37,6 @@
             padding: 0;
             background-color: #ffffff;
             width: 100%;
-            height: 100%;
         }
 
         .top-accent {
@@ -31,59 +44,83 @@
             width: 100%;
             background: linear-gradient(90deg, #0b3d91 0%, #00d2ff 100%);
         }
-        .invoice-wrapper {
-            padding: 10mm 20mm;
-            box-sizing: border-box;
-        }
+        .invoice-wrapper { padding: 38px 76px; box-sizing: border-box; }
+
         .header-table { width: 100%; margin-bottom: 30px; }
         .header-table td { vertical-align: middle; }
         .logo-img { height: 60px; object-fit: contain; display: block; }
         .company-info { font-size: 12px; color: #444; margin-top: 5px; line-height: 1.5; }
-        .invoice-label { text-align: right; font-size: 40px; font-weight: 800; color: #0b3d91; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+        .invoice-label { text-align: right; font-size: 40px; font-weight: 800; color: var(--brand); letter-spacing: 2px; text-transform: uppercase; margin: 0; }
         .invoice-meta { text-align: right; font-size: 12px; color: #444; margin-top: 10px; line-height: 1.6; }
         .grid-layout { width: 100%; margin-bottom: 30px; }
         .grid-layout td { vertical-align: top; width: 50%; }
-        .section-title { font-size: 12px; text-transform: uppercase; color: #0b3d91; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; border-bottom: 2px solid #0b3d91; display: inline-block; padding-bottom: 3px; }
+        .section-title { font-size: 12px; text-transform: uppercase; color: var(--brand); font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; border-bottom: 2px solid var(--brand); display: inline-block; padding-bottom: 3px; }
         .client-info { font-size: 14px; line-height: 1.6; color: #1a1a1a; font-weight: 600; white-space: pre-wrap; }
-        
+
         .items-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #cbd5e1; }
-        .items-table th { text-align: left; font-size: 11px; text-transform: uppercase; background-color: #0b3d91; color: #ffffff; padding: 10px 15px; font-weight: 700; letter-spacing: 1px; }
+        .items-table th { text-align: left; font-size: 11px; text-transform: uppercase; background-color: var(--brand); color: #ffffff; padding: 10px 15px; font-weight: 700; letter-spacing: 1px; }
         .items-table td { padding: 12px 15px; font-size: 13px; border-bottom: 1px solid #cbd5e1; color: #1a1a1a; }
         .items-table tbody tr:nth-child(even) { background-color: #f8fafc; }
         .items-table th.amount, .items-table td.amount { text-align: right; font-weight: 600; }
         .items-table th.center, .items-table td.center { text-align: center; }
         .items-table td.desc { font-weight: 700; white-space: pre-wrap; }
-        
+
         .bottom-section-table { width: 100%; margin-top: 10px; }
         .bottom-section-table td { vertical-align: top; }
         .payment-info { padding: 15px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; text-align: center; width: 220px; }
-        .qr-title { font-size: 11px; font-weight: 800; color: #0b3d91; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .qr-img { width: 110px; height: 110px; object-fit: cover; border: 4px solid #ffffff; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 10px; display: inline-block;}
+        .qr-title { font-size: 11px; font-weight: 800; color: var(--brand); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        /* object-fit: cover QR ko crop kar sakta hai -> contain, aur image-rendering crisp */
+        .qr-img { width: 110px; height: 110px; object-fit: contain; image-rendering: pixelated; border: 4px solid #ffffff; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 10px; display: inline-block; }
         .payment-text { font-size: 11px; color: #1a1a1a; font-weight: 700; line-height: 1.5; }
-        
+
         .totals-table { width: 320px; float: right; border-collapse: collapse; border: 1px solid #cbd5e1; }
         .totals-table td { padding: 10px 15px; font-size: 13px; color: #334155; border-bottom: 1px solid #cbd5e1; }
         .totals-table .amount { text-align: right; font-weight: 700; color: #0f172a; }
-        .total-payable td { background-color: #0b3d91; color: #ffffff; font-size: 16px; font-weight: 800; border: none; }
+        .total-payable td { background-color: var(--brand); color: #ffffff; font-size: 16px; font-weight: 800; border: none; }
         .total-payable .amount { color: #ffffff; font-size: 18px; }
-        
+
         .footer { clear: both; margin-top: 50px; font-size: 11px; color: #94a3b8; border-top: 1px solid #cbd5e1; padding-top: 15px; text-align: center; font-weight: 500; }
+
+        /* Off-screen stage: capture hamesha isi se hoti hai, isliye window size / zoom / scroll ka koi asar nahi */
+        #pdfStage {
+            position: absolute;
+            left: -20000px;
+            top: 0;
+            width: var(--page-w);
+            background: #ffffff;
+        }
+
+        /* ---- Vector print path (Save as PDF) ---- */
+        @page { size: A4; margin: 0; }
+        @media print {
+            html, body { background: #ffffff !important; margin: 0 !important; padding: 0 !important; }
+            .no-print { display: none !important; }
+            #printArea { width: 100% !important; overflow: visible !important; }
+            .invoice-preview-container {
+                width: 210mm !important;
+                min-height: auto !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+            /* background colors print par bhi aayein */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-0 m-0 font-sans">
-    
+
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
-        
-        <!-- CONTROL PANEL (Form) -->
-        <div class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md h-fit">
+
+        <!-- CONTROL PANEL -->
+        <div class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow-md h-fit no-print">
             <h2 class="text-2xl font-bold mb-6 text-gray-800">Invoice Generator</h2>
-            
+
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Invoice #</label>
                     <input type="text" id="invNo" class="mt-1 w-full border rounded p-2" value="INV-CBX-006" oninput="updatePreview()">
                 </div>
-                
+
                 <div class="flex gap-4">
                     <div class="w-1/2">
                         <label class="block text-sm font-medium text-gray-700">Date</label>
@@ -119,9 +156,7 @@
                         <label class="block text-sm font-medium text-gray-700">Items</label>
                         <button onclick="addItem()" class="bg-blue-500 text-white px-2 py-1 text-xs rounded hover:bg-blue-600">+ Add Item</button>
                     </div>
-                    <div id="itemsContainer" class="space-y-2">
-                        <!-- Items will be generated here by JS -->
-                    </div>
+                    <div id="itemsContainer" class="space-y-2"></div>
                 </div>
 
                 <div class="border-t pt-4">
@@ -129,14 +164,18 @@
                     <input type="file" id="qrUpload" accept="image/*" class="mt-1 w-full" onchange="loadQR(event)">
                 </div>
 
-                <button onclick="generatePDF()" class="w-full bg-green-600 text-white font-bold py-3 rounded mt-6 hover:bg-green-700">
+                <button id="btnPdf" onclick="generatePDF()" class="w-full bg-green-600 text-white font-bold py-3 rounded mt-6 hover:bg-green-700 disabled:opacity-60">
                     Export as PDF
                 </button>
+                <button onclick="window.print()" class="w-full bg-slate-800 text-white font-bold py-3 rounded hover:bg-slate-900">
+                    Print / Save as PDF (sharp text)
+                </button>
+                <p class="text-xs text-gray-500">Print wala option text ko vector rakhta hai — file choti aur text selectable rehta hai.</p>
             </div>
         </div>
 
         <!-- INVOICE PREVIEW -->
-        <div class="w-full lg:w-2/3 overflow-x-auto">
+        <div class="w-full lg:w-2/3 overflow-x-auto" id="printArea">
             <div class="invoice-preview-container" id="invoicePDF">
                 <div class="invoice-body">
                     <div class="top-accent"></div>
@@ -180,9 +219,7 @@ LAHORE</div>
                                     <th class="amount">Amount (<span id="prevCurrencyHead">USD</span>)</th>
                                 </tr>
                             </thead>
-                            <tbody id="prevItemsBody">
-                                <!-- Dynamic rows -->
-                            </tbody>
+                            <tbody id="prevItemsBody"></tbody>
                         </table>
 
                         <table class="bottom-section-table">
@@ -203,7 +240,7 @@ LAHORE</div>
                                             <td>Subtotal (<span id="prevSubCurrency">USD</span>)</td>
                                             <td class="amount" id="prevSubtotal">$0.00</td>
                                         </tr>
-                                        <tr class="highlight-row" id="rowRate">
+                                        <tr id="rowRate">
                                             <td>Exchange Rate (PKR)</td>
                                             <td class="amount" id="prevRate">290.00</td>
                                         </tr>
@@ -215,7 +252,7 @@ LAHORE</div>
                                 </td>
                             </tr>
                         </table>
-                        
+
                         <div class="footer">
                             This is a system generated document by Cobitx Technologies. No physical signature is required.<br>
                             Thank you for your business.
@@ -226,13 +263,24 @@ LAHORE</div>
         </div>
     </div>
 
+    <!-- Capture stage (screen par nazar nahi aata) -->
+    <div id="pdfStage" aria-hidden="true"></div>
+
     <script>
+        'use strict';
+
+        /* ---------------- Config ---------------- */
+        const PAGE = { w: 794, h: 1123 };            // A4 in CSS px @96dpi
+        const PT   = { w: 595.28, h: 841.89 };       // A4 in PDF points
+        const SCALE = 3;                             // capture resolution multiplier
+
         let items = [
             { desc: 'RoadX.pk Subscription fee', cycle: 'Monthly', amount: 10000 }
         ];
 
         document.getElementById('invDate').valueAsDate = new Date();
 
+        /* ---------------- Form ---------------- */
         function renderFormItems() {
             const container = document.getElementById('itemsContainer');
             container.innerHTML = '';
@@ -243,8 +291,7 @@ LAHORE</div>
                         <input type="text" class="w-1/4 p-1 border rounded text-xs" placeholder="Cycle" value="${item.cycle}" oninput="updateItem(${index}, 'cycle', this.value)">
                         <input type="number" class="w-1/4 p-1 border rounded text-xs" placeholder="Amt" value="${item.amount}" oninput="updateItem(${index}, 'amount', this.value)">
                         <button class="text-red-500 font-bold px-1" onclick="removeItem(${index})">X</button>
-                    </div>
-                `;
+                    </div>`;
             });
             updatePreview();
         }
@@ -254,108 +301,173 @@ LAHORE</div>
             updatePreview();
         }
 
-        function addItem() {
-            items.push({ desc: '', cycle: 'Monthly', amount: 0 });
-            renderFormItems();
-        }
-
-        function removeItem(index) {
-            items.splice(index, 1);
-            renderFormItems();
-        }
+        function addItem() { items.push({ desc: '', cycle: 'Monthly', amount: 0 }); renderFormItems(); }
+        function removeItem(index) { items.splice(index, 1); renderFormItems(); }
 
         function toggleExchangeRate() {
             const curr = document.getElementById('invCurrency').value;
-            const rateDiv = document.getElementById('exchangeRateDiv');
-            const rowSub = document.getElementById('rowSubtotal');
-            const rowRate = document.getElementById('rowRate');
-            
-            if(curr === 'PKR') {
-                rateDiv.style.display = 'none';
-                rowSub.style.display = 'none';
-                rowRate.style.display = 'none';
-            } else {
-                rateDiv.style.display = 'block';
-                rowSub.style.display = 'table-row';
-                rowRate.style.display = 'table-row';
-            }
+            const isPKR = curr === 'PKR';
+            document.getElementById('exchangeRateDiv').style.display = isPKR ? 'none' : 'block';
+            document.getElementById('rowSubtotal').style.display = isPKR ? 'none' : 'table-row';
+            document.getElementById('rowRate').style.display     = isPKR ? 'none' : 'table-row';
+        }
+
+        function formatDate(rawDate) {
+            // new Date('2026-08-06') UTC midnight parse karta hai -> timezone ke hisaab se
+            // din peeche ja sakta hai. Isliye manual local-date banate hain.
+            const [y, m, d] = rawDate.split('-').map(Number);
+            return new Date(y, m - 1, d)
+                .toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function money(n, digits = 2) {
+            return n.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
         }
 
         function updatePreview() {
             document.getElementById('prevInvNo').innerText = document.getElementById('invNo').value;
-            
+
             const rawDate = document.getElementById('invDate').value;
-            if(rawDate) {
-                const dateObj = new Date(rawDate);
-                const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('prevDate').innerText = dateObj.toLocaleDateString('en-US', options);
-            }
-            
+            if (rawDate) document.getElementById('prevDate').innerText = formatDate(rawDate);
+
             document.getElementById('prevDue').innerText = document.getElementById('invDue').value;
             document.getElementById('prevBilledTo').innerText = document.getElementById('invBilledTo').value;
 
             const curr = document.getElementById('invCurrency').value;
             const rate = parseFloat(document.getElementById('invRate').value) || 1;
-            
+
             document.getElementById('prevCurrencyHead').innerText = curr;
-            document.getElementById('prevSubCurrency').innerText = curr;
-            
+            document.getElementById('prevSubCurrency').innerText  = curr;
+
             const tbody = document.getElementById('prevItemsBody');
-            tbody.innerHTML = '';
+            const symbol = curr === 'USD' ? '$' : 'PKR ';
             let subtotal = 0;
-            
-            const currSymbol = curr === 'USD' ? '$' : 'PKR ';
+            let rows = '';
 
             items.forEach(item => {
                 subtotal += item.amount;
-                tbody.innerHTML += `
+                rows += `
                     <tr>
                         <td class="desc">${item.desc}</td>
                         <td class="center">${item.cycle}</td>
-                        <td class="amount">${currSymbol}${item.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
-                    </tr>
-                `;
+                        <td class="amount">${symbol}${money(item.amount)}</td>
+                    </tr>`;
             });
+            tbody.innerHTML = rows;
+
+            document.getElementById('prevTotalCurrency').innerText = 'PKR';
 
             if (curr === 'USD') {
-                document.getElementById('prevSubtotal').innerText = `$${subtotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
-                document.getElementById('prevRate').innerText = rate.toLocaleString(undefined, {minimumFractionDigits: 2});
-                const totalPKR = subtotal * rate;
-                document.getElementById('prevTotalCurrency').innerText = 'PKR';
-                document.getElementById('prevTotal').innerText = `Rs ${totalPKR.toLocaleString()}`;
+                document.getElementById('prevSubtotal').innerText = `$${money(subtotal)}`;
+                document.getElementById('prevRate').innerText     = money(rate);
+                document.getElementById('prevTotal').innerText    = `Rs ${money(subtotal * rate, 0)}`;
             } else {
-                document.getElementById('prevTotalCurrency').innerText = 'PKR';
-                document.getElementById('prevTotal').innerText = `Rs ${subtotal.toLocaleString()}`;
+                document.getElementById('prevTotal').innerText    = `Rs ${money(subtotal, 0)}`;
             }
         }
 
         function loadQR(event) {
             const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById('prevQR');
-                    img.src = e.target.result;
-                    img.style.display = 'inline-block';
-                    document.getElementById('qrPlaceholder').style.display = 'none';
-                }
-                reader.readAsDataURL(file);
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = document.getElementById('prevQR');
+                img.src = e.target.result;
+                img.style.display = 'inline-block';
+                document.getElementById('qrPlaceholder').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /* ---------------- PDF export ---------------- */
+
+        // Capture se pehle saari images decode ho chuki hon, warna QR/logo blank aata hai.
+        function waitForImages(root) {
+            const imgs = Array.from(root.querySelectorAll('img')).filter(i => i.src);
+            return Promise.all(imgs.map(img => img.complete
+                ? Promise.resolve()
+                : new Promise(res => { img.onload = img.onerror = res; })));
+        }
+
+        async function renderInvoiceCanvas() {
+            const stage = document.getElementById('pdfStage');
+            const clone = document.getElementById('invoicePDF').cloneNode(true);
+
+            clone.removeAttribute('id');
+            clone.style.margin = '0';
+            clone.style.boxShadow = 'none';
+            clone.style.width = PAGE.w + 'px';
+
+            stage.innerHTML = '';
+            stage.appendChild(clone);
+            await waitForImages(clone);
+
+            // Scroll offset html2canvas ka purana bug hai — isi wajah se content
+            // page par neeche khisak jata tha. Capture se pehle top par le aate hain.
+            const sx = window.scrollX, sy = window.scrollY;
+            window.scrollTo(0, 0);
+
+            try {
+                return await html2canvas(clone, {
+                    scale: SCALE,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    windowWidth: PAGE.w,
+                    windowHeight: Math.max(PAGE.h, clone.scrollHeight)
+                });
+            } finally {
+                window.scrollTo(sx, sy);
+                stage.innerHTML = '';
             }
         }
 
-        function generatePDF() {
-            const element = document.getElementById('invoicePDF');
-            const invNo = document.getElementById('invNo').value || 'Invoice';
-            
-            const opt = {
-                margin:       [0, 0, 0, 0],
-                filename:     `${invNo}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', putOnlyUsedFonts: true }
-            };
+        async function generatePDF() {
+            const btn = document.getElementById('btnPdf');
+            const label = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = 'Generating…';
 
-            html2pdf().set(opt).from(element).save();
+            try {
+                const canvas = await renderInvoiceCanvas();
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'portrait', compress: true });
+
+                const sliceH = PAGE.h * SCALE;                 // ek page ki height canvas px mein
+                // -4px tolerance: rounding ki wajah se 1px ka extra blank page ban jata tha
+                const pages = Math.max(1, Math.ceil((canvas.height - 4) / sliceH));
+
+                const buffer = document.createElement('canvas');
+                const ctx = buffer.getContext('2d');
+                buffer.width = canvas.width;
+
+                for (let p = 0; p < pages; p++) {
+                    const offset = p * sliceH;
+                    const h = Math.min(sliceH, canvas.height - offset);
+
+                    buffer.height = h;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, buffer.width, h);
+                    ctx.drawImage(canvas, 0, offset, canvas.width, h, 0, 0, canvas.width, h);
+
+                    if (p > 0) pdf.addPage();
+                    // PNG: QR code ke edges sharp rehte hain (JPEG artifacts scan fail kara sakte hain)
+                    pdf.addImage(
+                        buffer.toDataURL('image/png'), 'PNG',
+                        0, 0, PT.w, (h / sliceH) * PT.h,
+                        undefined, 'FAST'
+                    );
+                }
+
+                const invNo = document.getElementById('invNo').value.trim() || 'Invoice';
+                pdf.save(`${invNo}.pdf`);
+            } catch (err) {
+                console.error(err);
+                alert('PDF generate nahi ho saka. Console mein detail dekhein.');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = label;
+            }
         }
 
         renderFormItems();
