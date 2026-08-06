@@ -9,11 +9,11 @@
     <style>
         .invoice-preview-container {
             width: 210mm;
-            min-height: 297mm;
+            height: 297mm;
             background: white;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 0;
             position: relative;
+            box-sizing: border-box;
         }
         
         .invoice-body {
@@ -32,7 +32,7 @@
             background: linear-gradient(90deg, #0b3d91 0%, #00d2ff 100%);
         }
         .invoice-wrapper {
-            padding: 15mm 20mm;
+            padding: 10mm 20mm;
             box-sizing: border-box;
         }
         .header-table { width: 100%; margin-bottom: 30px; }
@@ -70,7 +70,7 @@
         .footer { clear: both; margin-top: 50px; font-size: 11px; color: #94a3b8; border-top: 1px solid #cbd5e1; padding-top: 15px; text-align: center; font-weight: 500; }
     </style>
 </head>
-<body class="bg-gray-100 p-4 font-sans">
+<body class="bg-gray-100 p-0 m-0 font-sans">
     
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6">
         
@@ -348,11 +348,11 @@ LAHORE</div>
             const invNo = document.getElementById('invNo').value || 'Invoice';
             
             const opt = {
-                margin:       0,
+                margin:       [0, 0, 0, 0],
                 filename:     `${invNo}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', putOnlyUsedFonts: true }
             };
 
             html2pdf().set(opt).from(element).save();
