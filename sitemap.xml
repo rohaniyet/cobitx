@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<!--
+  Filhal sirf homepage hai. Jaise jaise service pages banain
+  (/erp-software-pakistan/, /rice-mill-software/, /transport-erp/,
+   /school-management-system/, /fbr-tax-filing/, /company-formation/),
+  har page ka <url> block yahan add karte jayen aur lastmod update karen.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-       <loc>https://cobitx.com/</loc>
-       <lastmod>2026-08-07T03:26:57+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>1.0000</priority>
+    <loc>https://cobitx.com/</loc>
+    <lastmod>2026-08-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
 </urlset>

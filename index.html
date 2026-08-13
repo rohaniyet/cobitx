@@ -1,37 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#020202]">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>Cobitx Technologies | Next-Gen IT, ERP & Corporate Solutions</title>
-    <meta name="title" content="Cobitx Technologies | Next-Gen IT, ERP & Corporate Solutions">
-    <meta name="description" content="Cobitx Technologies is the top software house in Pakistan offering elite custom software development, industrial/commercial ERPs (Rice, Export, Transport, Production), school management systems, global company formation, and tax consultancies.">
-    <meta name="keywords" content="Cobitx Technologies, best software developer in Pakistan, top software company pakistan, rice software, export software, transport software, school software, university portal development, import export software, shipping line software, production software, complete ERP software for company, industrial ERP software pakistan, commercial software development, custom software house muridke lahore, best digital marketer in pakistan, learn digital marketing, Waqas Gilani, RoadX, KTrade.uk, chat bot, trading bot maker, software house in Pakistan, tax consultant Pakistan, web development, company formation USA UK UAE, ERP solutions, Syed Waqas Asim">
-    <meta name="author" content="Syed Waqas Asim">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook / AI Crawlers -->
-    <meta property="type" content="website">
-    <meta property="url" content="https://cobitx.com/">
-    <meta property="title" content="Cobitx Technologies | Best Software House & ERP Developer in Pakistan">
-    <meta property="description" content="Elite software engineering, industrial & commercial ERPs, school/college/university management systems, AI bots, and global tax & corporate consulting.">
-    <meta property="image" content="https://cobitx.com/logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05080F">
 
-    <!-- Structured Data (JSON-LD Schema for AI & Google Knowledge Graph) -->
-    <script type="application/ld+json">
+<title>Cobitx Technologies — Software House in Pakistan | Custom ERP, Web & AI Development</title>
+<meta name="description" content="Cobitx Technologies is a software house in Muridke, Punjab, Pakistan. We build custom ERP systems for rice mills, transport fleets, exporters and schools, plus websites, AI chatbots and trading bots — alongside FBR tax filing and company formation in Pakistan, USA, UK and UAE.">
+<meta name="author" content="Syed Waqas Asim">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://cobitx.com/">
+
+<!-- Open Graph — ye tags pehle 'og:' prefix ke baghair the, isliye WhatsApp/Facebook preview kaam nahi karta tha -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cobitx Technologies">
+<meta property="og:locale" content="en_PK">
+<meta property="og:url" content="https://cobitx.com/">
+<meta property="og:title" content="Cobitx Technologies — Software House in Pakistan">
+<meta property="og:description" content="Custom ERP, web and AI development for rice mills, transport fleets, exporters and schools — plus FBR tax filing and company formation.">
+<meta property="og:image" content="https://cobitx.com/logo.png">
+<meta property="og:image:alt" content="Cobitx Technologies logo">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@CobitxTech">
+<meta name="twitter:creator" content="@CobitxTech">
+<meta name="twitter:title" content="Cobitx Technologies — Software House in Pakistan">
+<meta name="twitter:description" content="Custom ERP, web and AI development, plus FBR tax filing and company formation.">
+<meta name="twitter:image" content="https://cobitx.com/logo.png">
+
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!--
+  Structured data.
+  Purani file mein "@type": "SoftwareCompany" tha — schema.org mein aisi koi type
+  exist hi nahi karti, isliye Google poora block ignore kar deta tha.
+  Ab valid @graph: Organization + ProfessionalService + WebSite + FAQPage.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "SoftwareCompany",
+      "@type": "Organization",
+      "@id": "https://cobitx.com/#organization",
       "name": "Cobitx Technologies",
-      "alternateName": "Cobitx",
-      "url": "https://cobitx.com",
-      "logo": "https://cobitx.com/logo.png",
+      "legalName": "Cobitx Technologies (SMC-Private) Limited",
+      "alternateName": ["Cobitx", "Cobitx Technologies SMC-Pvt Ltd"],
+      "url": "https://cobitx.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://cobitx.com/#logo",
+        "url": "https://cobitx.com/logo.png",
+        "caption": "Cobitx Technologies"
+      },
+      "image": { "@id": "https://cobitx.com/#logo" },
+      "description": "Software house in Muridke, Punjab, Pakistan building custom ERP systems, web applications and AI tools for rice mills, transport fleets, exporters, shipping agents and educational institutions, alongside tax filing and company formation services.",
+      "foundingDate": "2024",
       "founder": {
         "@type": "Person",
+        "@id": "https://cobitx.com/#founder",
         "name": "Syed Waqas Asim",
-        "alternateName": "Waqas Gilani"
+        "jobTitle": "Founder & Director",
+        "worksFor": { "@id": "https://cobitx.com/#organization" }
       },
       "address": {
         "@type": "PostalAddress",
@@ -41,274 +76,1030 @@
         "postalCode": "39530",
         "addressCountry": "PK"
       },
-      "contactPoint": {
+      "contactPoint": [{
         "@type": "ContactPoint",
         "telephone": "+92-345-4680844",
-        "contactType": "customer service",
-        "areaServed": "PK",
+        "contactType": "sales",
+        "areaServed": ["PK", "US", "GB", "AE"],
         "availableLanguage": ["English", "Urdu"]
-      },
+      }],
       "sameAs": [
-        "https://cobitx.com"
+        "https://www.facebook.com/CobitxTechnologies",
+        "https://x.com/CobitxTech",
+        "https://www.youtube.com/@cobitx",
+        "https://www.instagram.com/CobitxTechnologies",
+        "https://www.pinterest.com/CobitxTechnologies"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://cobitx.com/#business",
+      "name": "Cobitx Technologies",
+      "parentOrganization": { "@id": "https://cobitx.com/#organization" },
+      "url": "https://cobitx.com/",
+      "image": { "@id": "https://cobitx.com/#logo" },
+      "telephone": "+92-345-4680844",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1, Mall of Muridke",
+        "addressLocality": "Muridke",
+        "addressRegion": "Punjab",
+        "postalCode": "39530",
+        "addressCountry": "PK"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 31.8022, "longitude": 74.2544 },
+      "areaServed": [
+        { "@type": "Country", "name": "Pakistan" },
+        { "@type": "Country", "name": "United States" },
+        { "@type": "Country", "name": "United Kingdom" },
+        { "@type": "Country", "name": "United Arab Emirates" }
       ],
-      "description": "Top-tier software house in Pakistan offering custom ERPs (rice, export, transport, production, shipping line), commercial software, AI trading bots, and management systems for educational institutes, alongside global company formation and tax consultancies.",
-      "makesOffer": [
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:00", "closes": "18:00"
+      }],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cobitx Technologies services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom software development", "description": "Bespoke business software built to a client's own workflow, from requirement mapping to deployment and support." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ERP software for rice mills", "description": "Paddy intake, drying and milling yield, storage lots, by-product tracking, export batches and costing for rice mills in Pakistan." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transport and fleet management software", "description": "Trip and load dispatch, driver records, fuel and tyre costing, party ledgers and freight billing for goods transport companies." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Import export and shipping software", "description": "Contracts, shipment documents, container tracking, LC and bank realisation follow-up for exporters and shipping agents." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Production and manufacturing ERP", "description": "Bill of materials, batch production, stock issue and consumption, wastage and per-unit costing for factories." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "School college and university management system", "description": "Admissions, attendance, fee challans and defaulter reports, exams and result cards, staff payroll and parent portal." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website design and development", "description": "Fast, responsive, search-optimised business websites, portals and web applications." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI chatbot and trading bot development", "description": "AI assistants trained on a company's own data, WhatsApp automation, and rule-based market and trading tools." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital marketing and SEO", "description": "Facebook and Meta ad campaigns, content and search optimisation for Pakistani businesses." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo design and video editing", "description": "Brand identity, logo design and promotional video editing." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "FBR tax registration and return filing", "description": "NTN registration, income tax and sales tax return filing, PRA registration and withholding statements." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Company formation in Pakistan, USA, UK and UAE", "description": "SECP and international company incorporation, documentation and post-registration compliance." } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cobitx.com/#website",
+      "url": "https://cobitx.com/",
+      "name": "Cobitx Technologies",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://cobitx.com/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cobitx.com/#webpage",
+      "url": "https://cobitx.com/",
+      "name": "Cobitx Technologies — Software House in Pakistan",
+      "isPartOf": { "@id": "https://cobitx.com/#website" },
+      "about": { "@id": "https://cobitx.com/#organization" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cobitx.com/#faq",
+      "isPartOf": { "@id": "https://cobitx.com/#webpage" },
+      "mainEntity": [
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Custom Software Development & ERP Solutions (Rice, Production, Shipping)"
+          "@type": "Question",
+          "name": "What does Cobitx Technologies do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cobitx Technologies is a software house based in Muridke, Punjab, Pakistan. It builds custom ERP systems for rice mills, goods transport fleets, exporters, shipping agents, factories and educational institutions, and also develops websites, web applications, AI chatbots and trading bots. Alongside software, the company provides FBR tax registration and return filing, PRA registration, and company formation in Pakistan, the USA, the UK and the UAE."
           }
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Educational Institution Software (Schools, Colleges, Universities)"
+          "@type": "Question",
+          "name": "Where is Cobitx Technologies located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cobitx Technologies is located at 1, Mall of Muridke, Muridke, Punjab 39530, Pakistan, roughly 40 kilometres from Lahore. The team works with clients across Pakistan and internationally in the USA, UK and UAE, and most projects run remotely over WhatsApp, email and video calls."
           }
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Transport & Logistics Software (RoadX)"
+          "@type": "Question",
+          "name": "How do I contact Cobitx Technologies to get software built?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The fastest route is WhatsApp on +92 345 468 0844, or the contact form on cobitx.com. Send a short description of your business and the problem you want solved. Cobitx replies with a scope outline, a fixed quotation and a delivery timeline before any work begins."
           }
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "AI Chat Bot & Trading Bot Development"
+          "@type": "Question",
+          "name": "Does Cobitx Technologies build custom ERP software for rice mills and factories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cobitx builds industry-specific ERP systems rather than one generic package. For rice mills this covers paddy intake, drying and milling yield, storage lots, by-products, export batches and costing. For factories it covers bill of materials, batch production, stock consumption, wastage and per-unit costing. Each system is mapped to the client's existing registers and workflow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Cobitx Technologies handle FBR tax filing as well as software?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Cobitx provides NTN registration, income tax return filing, sales tax return filing, PRA registration and Punjab Food Authority licensing. This is a separate service line from software development, run by a practising taxation professional, and it is a common reason Pakistani businesses use Cobitx for both their systems and their compliance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Cobitx the same as COBIT, the ISACA framework?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. COBIT is an IT governance framework published by ISACA. Cobitx Technologies is an unrelated software development company in Pakistan. The correct spelling of the company name is Cobitx, with an x at the end."
           }
         }
       ]
     }
-    </script>
+  ]
+}
+</script>
 
-    <link rel="icon" type="image/png" href="logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            color: #ffffff; 
-            overflow-x: hidden;
-        }
+<style>
+/* ============================================================
+   Cobitx Technologies — design tokens
+   Palette derived from the logo (navy + cyan), with a single
+   warm signal colour for live/status states so the page isn't
+   a one-accent monochrome.
+   ============================================================ */
+:root{
+  --void:#05080F;
+  --panel:#0A0F1B;
+  --panel-2:#0C131F;
+  --line:#16233A;
+  --line-2:#1E3151;
+  --navy:#0B3D91;
+  --cyan:#00D2FF;
+  --signal:#FFB020;
+  --ink:#E9EFF8;
+  --muted:#7B8DA8;
+  --dim:#4E5F79;
 
-        h1, h2, .brand-font {
-            font-family: 'Syncopate', sans-serif;
-        }
-        
-        .glass-panel { 
-            background: rgba(255, 255, 255, 0.02); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.4s ease;
-        }
+  --display:'Chakra Petch',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
 
-        .glass-panel:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(0, 210, 255, 0.3);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(0, 210, 255, 0.15);
-        }
+  --gut:clamp(20px,5vw,64px);
+  --sec:clamp(72px,10vw,132px);
+  --maxw:1240px;
+}
 
-        .text-glow {
-            text-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
-        }
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--body);font-weight:300;font-size:16px;line-height:1.65;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.06;margin:0;letter-spacing:-.01em}
+p{margin:0}
+::selection{background:var(--cyan);color:#000}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:2px}
 
-        .gradient-text { 
-            background: linear-gradient(135deg, #ffffff 0%, #00d2ff 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.sec{padding-block:var(--sec);position:relative;z-index:1}
 
-        /* Animated Background Orbs */
-        .orb-1, .orb-2 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            animation: float-orb 15s infinite alternate ease-in-out;
-        }
-        .orb-1 {
-            width: 500px; height: 500px;
-            background: rgba(11, 61, 145, 0.4);
-            top: -10%; left: -10%;
-        }
-        .orb-2 {
-            width: 400px; height: 400px;
-            background: rgba(0, 210, 255, 0.2);
-            bottom: -10%; right: -5%;
-            animation-delay: -5s;
-        }
+/* --- engineering grid backdrop (blurred orbs ki jagah) --- */
+.grid-bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  opacity:.32;
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 5%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 5%,transparent 75%);
+}
+.grid-bg::after{
+  content:'';position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,210,255,.5),transparent);
+  animation:sweep 11s linear infinite;
+}
+@keyframes sweep{0%{top:-2%}100%{top:102%}}
 
-        @keyframes float-orb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, 100px) scale(1.2); }
-        }
+/* --- eyebrow / labels --- */
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--cyan);display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--cyan);flex:none}
+.eyebrow.amber{color:var(--signal)}
+.eyebrow.amber::before{background:var(--signal)}
 
-        .btn-glow {
-            position: relative;
-        }
-        .btn-glow::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #0b3d91, #00d2ff, #ffffff, #00d2ff);
-            z-index: -1;
-            border-radius: 9999px;
-            background-size: 400%;
-            animation: glowing 20s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .btn-glow:hover::before { opacity: 1; }
+/* --- nav --- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(5,8,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;gap:18px;height:74px}
+.nav-logo{height:38px;width:auto;object-fit:contain}
+.nav-word{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.16em}
+.nav-word i{font-style:normal;color:var(--cyan)}
+.nav-links{display:none;gap:30px;margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{
+  margin-left:auto;display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line-2);padding:11px 18px;border-radius:2px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  transition:border-color .25s,color .25s,background .25s;
+}
+.nav-links + .nav-cta{margin-left:0}
+.nav-cta:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,210,255,.06)}
+@media(min-width:1000px){.nav-links{display:flex}}
 
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
-        }
-    </style>
+/* --- hero --- */
+.hero{padding-block:clamp(56px,9vw,104px) var(--sec)}
+.hero-grid{display:grid;gap:clamp(44px,6vw,72px);align-items:center}
+@media(min-width:1000px){.hero-grid{grid-template-columns:1.06fr .94fr}}
+
+.hero h1{
+  font-size:clamp(38px,7.2vw,80px);font-weight:700;letter-spacing:-.025em;
+  text-transform:uppercase;margin-bottom:26px;
+}
+.hero h1 .lo{display:block;overflow:hidden}
+.hero h1 .lo>span{display:block;animation:rise .85s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 .lo:nth-child(2)>span{animation-delay:.09s}
+.hero h1 .lo:nth-child(3)>span{animation-delay:.18s}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.accent{color:var(--cyan)}
+.hero-lede{color:var(--muted);font-size:clamp(15px,1.6vw,18px);max-width:52ch;margin-bottom:34px}
+.hero-lede strong{color:var(--ink);font-weight:500}
+
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:2px;
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;
+  border:1px solid transparent;transition:transform .2s,box-shadow .25s,border-color .25s,color .25s;
+}
+.btn-primary{background:var(--cyan);color:#03080E;font-weight:500;box-shadow:0 0 0 rgba(0,210,255,0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 34px -8px rgba(0,210,255,.55)}
+.btn-ghost{border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:34px;padding-top:24px;
+  border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+}
+
+/* ============================================================
+   SIGNATURE: system console
+   Cobitx ka kaam hai bikhri hui physical operations ko ek
+   screen par le aana — isliye hero mein wahi screen dikhai
+   gayi hai, jo unke banaye systems ke beech cycle karti hai.
+   ============================================================ */
+.console{
+  position:relative;background:var(--panel);border:1px solid var(--line-2);
+  font-family:var(--mono);overflow:hidden;
+}
+.console::before,.console::after{
+  content:'';position:absolute;width:11px;height:11px;border:1px solid var(--cyan);pointer-events:none;
+}
+.console::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.console::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+.con-bar{
+  display:flex;align-items:center;gap:10px;padding:12px 16px;
+  border-bottom:1px solid var(--line);background:var(--panel-2);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.led{width:6px;height:6px;border-radius:50%;background:var(--signal);flex:none;animation:blink 2.1s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.con-bar .right{margin-left:auto;color:var(--dim)}
+
+.con-body{padding:22px 20px 24px;min-height:296px;position:relative}
+.con-scan{
+  position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,transparent 42%,rgba(0,210,255,.16) 50%,transparent 58%);
+}
+.con-scan.run{animation:scan .62s ease-out}
+@keyframes scan{0%{opacity:1;transform:translateY(-100%)}100%{opacity:0;transform:translateY(100%)}}
+
+.con-tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:9px}
+.con-name{
+  font-family:var(--display);font-weight:600;font-size:clamp(21px,2.5vw,27px);
+  letter-spacing:-.01em;color:var(--ink);margin-bottom:5px;line-height:1.15;
+}
+.con-for{font-size:11.5px;color:var(--muted);margin-bottom:20px;letter-spacing:.03em}
+
+.con-rows{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.con-row{
+  display:flex;align-items:baseline;gap:14px;padding:10px 0;
+  border-bottom:1px solid var(--line);font-size:12px;
+  opacity:0;animation:fadein .4s ease-out forwards;
+}
+.con-row:nth-child(1){animation-delay:.10s}
+.con-row:nth-child(2){animation-delay:.18s}
+.con-row:nth-child(3){animation-delay:.26s}
+.con-row:nth-child(4){animation-delay:.34s}
+@keyframes fadein{to{opacity:1}}
+.con-row .k{color:var(--dim);flex:1;letter-spacing:.02em}
+.con-row .v{color:var(--cyan);font-weight:500;white-space:nowrap}
+
+.con-dots{display:flex;gap:7px;padding:0 20px 18px}
+.con-dot{
+  width:22px;height:2px;background:var(--line-2);border:0;padding:0;cursor:pointer;
+  transition:background .3s;
+}
+.con-dot[aria-current="true"]{background:var(--cyan)}
+
+/* --- ticker --- */
+.ticker{border-block:1px solid var(--line);background:var(--panel);overflow:hidden;padding:15px 0;position:relative;z-index:1}
+.ticker-track{display:flex;gap:0;width:max-content;animation:roll 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);padding:0 26px;white-space:nowrap;
+}
+.ticker span::after{content:'';display:inline-block;width:3px;height:3px;background:var(--cyan);border-radius:50%;margin-left:26px;vertical-align:middle}
+
+/* --- section heads --- */
+.head{margin-bottom:clamp(38px,5vw,58px);max-width:60ch}
+.head h2{font-size:clamp(28px,4.4vw,50px);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:16px}
+.head p{color:var(--muted);font-size:clamp(14.5px,1.5vw,17px)}
+
+/* --- cards --- */
+.cards{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:660px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{
+  background:var(--void);padding:clamp(26px,3vw,36px);position:relative;
+  transition:background .3s;min-height:100%;
+}
+.card:hover{background:var(--panel)}
+.card .num{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--dim);margin-bottom:18px;display:block}
+.card h3{font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.01em;margin-bottom:12px}
+.card p{color:var(--muted);font-size:14px;line-height:1.6}
+.card .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+.card .tags i{
+  font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--line-2);padding:4px 8px;border-radius:2px;
+}
+.card::after{
+  content:'';position:absolute;left:0;top:0;width:0;height:2px;background:var(--cyan);transition:width .38s cubic-bezier(.2,.7,.2,1);
+}
+.card:hover::after{width:100%}
+
+/* --- products --- */
+.prod{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:820px){.prod{grid-template-columns:1fr 1fr}}
+.prod-item{background:var(--void);padding:clamp(28px,3.4vw,44px);transition:background .3s}
+.prod-item:hover{background:var(--panel)}
+.prod-item .badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--signal);border:1px solid rgba(255,176,32,.3);padding:4px 9px;border-radius:2px;display:inline-block;margin-bottom:20px;
+}
+.prod-item h3{font-size:clamp(24px,3vw,32px);font-weight:700;margin-bottom:12px;letter-spacing:-.01em}
+.prod-item p{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.prod-item a{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);display:inline-flex;gap:8px;align-items:center}
+.prod-item a:hover{gap:14px;transition:gap .2s}
+
+/* --- split (compliance) --- */
+.split{display:grid;gap:clamp(34px,5vw,64px)}
+@media(min-width:940px){.split{grid-template-columns:.85fr 1.15fr;align-items:start}}
+.list{border-top:1px solid var(--line)}
+.list-row{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line)}
+@media(min-width:640px){.list-row{grid-template-columns:.9fr 1.4fr;gap:24px;align-items:baseline}}
+.list-row h4{font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.list-row p{color:var(--muted);font-size:14px}
+
+/* --- process (real sequence, isliye numbering justified) --- */
+.steps{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:760px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:var(--void);padding:clamp(24px,2.8vw,32px)}
+.step .n{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--cyan);display:block;margin-bottom:16px}
+.step h4{font-size:16px;font-weight:600;text-transform:uppercase;margin-bottom:10px}
+.step p{color:var(--muted);font-size:13.5px}
+
+/* --- about --- */
+.about{display:grid;gap:clamp(34px,5vw,60px)}
+@media(min-width:940px){.about{grid-template-columns:1.25fr .75fr}}
+.about-body p{color:var(--muted);font-size:clamp(15px,1.6vw,17.5px);margin-bottom:20px}
+.about-body strong{color:var(--ink);font-weight:500}
+.founder{border:1px solid var(--line-2);background:var(--panel);padding:clamp(24px,3vw,32px);position:relative}
+.founder::before{content:'';position:absolute;top:-1px;left:-1px;width:11px;height:11px;border:1px solid var(--signal);border-right:0;border-bottom:0}
+.founder .role{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:14px}
+.founder h3{font-size:22px;font-weight:600;margin-bottom:12px}
+.founder p{color:var(--muted);font-size:14px}
+
+/* --- faq --- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:22px 0;display:flex;gap:18px;align-items:flex-start;
+  font-family:var(--display);font-weight:600;font-size:clamp(16px,1.9vw,19px);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+';font-family:var(--mono);color:var(--cyan);flex:none;font-size:17px;line-height:1.35}
+.faq details[open] summary::before{content:'\2013'}
+.faq details p{color:var(--muted);font-size:15px;padding:0 0 24px 36px;max-width:78ch}
+
+/* --- cta --- */
+.cta-box{
+  border:1px solid var(--line-2);background:var(--panel);position:relative;
+  padding:clamp(38px,6vw,76px);text-align:center;
+}
+.cta-box::before,.cta-box::after{content:'';position:absolute;width:14px;height:14px;border:1px solid var(--cyan)}
+.cta-box::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.cta-box::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.cta-box h2{font-size:clamp(26px,4.4vw,48px);font-weight:700;text-transform:uppercase;margin-bottom:18px;letter-spacing:-.02em}
+.cta-box p{color:var(--muted);max-width:58ch;margin:0 auto 32px;font-size:clamp(14.5px,1.5vw,17px)}
+.cta-box .btns{justify-content:center}
+
+/* --- footer --- */
+.foot{border-top:1px solid var(--line);background:var(--panel);position:relative;z-index:1}
+.foot-in{padding-block:clamp(48px,6vw,68px) 26px}
+.foot-grid{display:grid;gap:38px;margin-bottom:44px}
+@media(min-width:860px){.foot-grid{grid-template-columns:1.5fr 1fr 1fr}}
+.foot h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 18px;font-weight:400}
+.foot-links{display:flex;flex-direction:column;gap:11px;font-size:14px;color:var(--muted)}
+.foot-links a:hover{color:var(--cyan)}
+.foot address{font-style:normal;color:var(--muted);font-size:14px;line-height:1.8}
+.foot address a:hover{color:var(--cyan)}
+
+.social{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.social a{
+  width:40px;height:40px;border:1px solid var(--line-2);border-radius:2px;
+  display:grid;place-items:center;transition:border-color .25s,background .25s,transform .25s;
+}
+.social a:hover{border-color:var(--cyan);background:rgba(0,210,255,.08);transform:translateY(-2px)}
+.social svg{width:17px;height:17px;fill:var(--muted);transition:fill .25s}
+.social a:hover svg{fill:var(--cyan)}
+
+.foot-base{
+  border-top:1px solid var(--line);padding-top:24px;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+}
+
+/* --- scroll reveal --- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--cyan);color:#000;padding:12px 20px;z-index:100}
+.skip:focus{left:12px;top:12px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+</style>
 </head>
-<body class="antialiased selection:bg-[#00d2ff] selection:text-black">
-    
-    <div class="orb-1"></div>
-    <div class="orb-2"></div>
 
-    <!-- Navbar -->
-    <nav class="container mx-auto px-6 py-8 flex justify-between items-center relative z-20">
-        <!-- Logo Image Integration -->
-        <a href="/" class="block">
-            <img src="logo.png" alt="Cobitx Technologies" class="h-12 md:h-16 object-contain" onerror="this.outerHTML='<div class=\'brand-font text-2xl font-bold tracking-widest\'>COBIT<span class=\'text-[#00d2ff]\'>X</span></div>'">
-        </a>
-        <a href="https://wa.me/923454680844" target="_blank" class="btn-glow bg-[#050505] border border-white/10 px-6 py-3 rounded-full flex items-center gap-3 text-sm tracking-widest uppercase font-bold hover:bg-white hover:text-black transition-colors duration-300">
-            <i class="fab fa-whatsapp text-lg text-[#25D366]"></i> <span class="hidden md:inline">Let's Talk</span>
-        </a>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="/" aria-label="Cobitx Technologies home" style="display:flex;align-items:center;gap:12px">
+      <img src="logo.png" alt="Cobitx Technologies" class="nav-logo" width="150" height="38"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'nav-word',innerHTML:'COBIT<i>X</i>'}))">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#systems">Systems</a>
+      <a href="#products">Products</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
     </nav>
+    <a class="nav-cta" href="https://wa.me/923454680844" target="_blank" rel="noopener">Start a project</a>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="container mx-auto px-6 py-24 md:py-32 relative z-10 flex flex-col items-center text-center">
-        <div class="uppercase tracking-[0.3em] text-xs md:text-sm font-bold text-[#00d2ff] mb-6 border border-[#00d2ff]/30 rounded-full px-6 py-2 bg-[#00d2ff]/5 backdrop-blur-sm">
-            Welcome to the future
-        </div>
-        <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold mb-8 leading-tight tracking-tighter text-glow">
-            ELEVATING <br> <span class="gradient-text">DIGITAL</span> REALITIES
+<main id="main">
+
+  <!-- ══ HERO ══ -->
+  <section class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Muridke · Punjab · Pakistan</p>
+        <h1>
+          <span class="lo"><span>Software for</span></span>
+          <span class="lo"><span>the work that</span></span>
+          <span class="lo"><span class="accent">actually runs</span></span>
         </h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-3xl mb-14 font-light leading-relaxed">
-            We fuse extreme-tier software engineering with premium corporate consulting. From scalable ERPs and immersive web designs to global company formations and expert tax advisory.
+        <p class="hero-lede">
+          Rice mills, transport fleets, exporters, factories and schools still run on
+          registers, WhatsApp threads and a dozen spreadsheets. <strong>We replace that
+          with one system that tells you what's happening</strong> — built around how your
+          business already works, not the other way round.
         </p>
-        <a href="https://wa.me/923454680844" target="_blank" class="bg-gradient-to-r from-[#0b3d91] to-[#00d2ff] text-white px-10 py-4 rounded-full font-bold tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:shadow-[0_0_50px_rgba(0,210,255,0.6)] hover:scale-105 transition-all duration-300 flex items-center gap-3">
-            Start Your Project <i class="fas fa-arrow-right"></i>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://wa.me/923454680844" target="_blank" rel="noopener">
+            Talk on WhatsApp
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6z"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#systems">See what we build</a>
+        </div>
+        <div class="hero-meta">
+          <span>Custom ERP</span>
+          <span>Web &amp; AI</span>
+          <span>FBR filing</span>
+          <span>PAK · USA · UK · UAE</span>
+        </div>
+      </div>
+
+      <!-- SIGNATURE ELEMENT -->
+      <div class="console" id="console">
+        <div class="con-bar">
+          <span class="led" aria-hidden="true"></span>
+          <span>System preview</span>
+          <span class="right"><span id="conIndex">01</span>/05</span>
+        </div>
+        <div class="con-body">
+          <div class="con-scan" id="conScan" aria-hidden="true"></div>
+          <div id="conPanel" aria-live="polite">
+            <!-- JS se bharta hai -->
+          </div>
+        </div>
+        <div class="con-dots" id="conDots" role="tablist" aria-label="System preview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TICKER ══ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- ══ SYSTEMS ══ -->
+  <section class="wrap sec" id="systems">
+    <div class="head rv">
+      <p class="eyebrow">What we build</p>
+      <h2>Systems, not templates</h2>
+      <p>Every industry counts things differently. A rice mill measures yield, a transport
+         company measures trips, a school measures defaulters. We build to that — one
+         codebase per client, mapped to the registers you already keep.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card rv">
+        <span class="num">ERP · AGRI</span>
+        <h3>Rice mill ERP</h3>
+        <p>Paddy intake and weighbridge, drying and milling yield, storage lots, broken and
+           bran by-products, export batches, and true per-bag costing.</p>
+        <div class="tags"><i>Intake</i><i>Yield</i><i>Lots</i><i>Costing</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">ERP · LOGISTICS</span>
+        <h3>Transport &amp; fleet</h3>
+        <p>Load dispatch, trip sheets, driver and vehicle records, fuel and tyre costing,
+           party ledgers and freight billing — the ledger your munshi keeps, on a screen.</p>
+        <div class="tags"><i>Dispatch</i><i>Trips</i><i>Ledger</i><i>Billing</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">ERP · TRADE</span>
+        <h3>Import, export &amp; shipping</h3>
+        <p>Contracts, invoices and packing lists, container and B/L tracking, LC terms and
+           bank realisation follow-up for exporters and shipping agents.</p>
+        <div class="tags"><i>Contracts</i><i>Docs</i><i>Containers</i><i>LC</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">ERP · MANUFACTURING</span>
+        <h3>Production &amp; inventory</h3>
+        <p>Bill of materials, batch production, store issue and consumption, wastage
+           tracking and per-unit costing for factories and processing units.</p>
+        <div class="tags"><i>BOM</i><i>Batches</i><i>Stock</i><i>Wastage</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">SAAS · EDUCATION</span>
+        <h3>Campus management</h3>
+        <p>Admissions, attendance, fee challans and defaulter lists, exams and result cards,
+           staff payroll, plus a parent portal that cuts the office queue.</p>
+        <div class="tags"><i>Fees</i><i>Exams</i><i>Payroll</i><i>Parent app</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">WEB · APPLICATIONS</span>
+        <h3>Websites &amp; portals</h3>
+        <p>Fast, responsive business sites and web applications that load quickly, rank in
+           search, and work properly on the phone your customers actually use.</p>
+        <div class="tags"><i>Websites</i><i>Portals</i><i>Dashboards</i><i>SEO</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">AI · AUTOMATION</span>
+        <h3>AI bots &amp; automation</h3>
+        <p>WhatsApp and web chatbots trained on your own catalogue and policies, document
+           extraction, report generation, and rule-based market and trading tools.</p>
+        <div class="tags"><i>Chatbots</i><i>WhatsApp</i><i>Trading tools</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">BRAND · GROWTH</span>
+        <h3>Identity &amp; marketing</h3>
+        <p>Logo and brand identity, video editing, Meta ad campaigns and search
+           optimisation — so the system you paid for actually brings in work.</p>
+        <div class="tags"><i>Logo</i><i>Video</i><i>Meta ads</i><i>SEO</i></div>
+      </article>
+
+      <article class="card rv">
+        <span class="num">SUPPORT</span>
+        <h3>Maintenance &amp; training</h3>
+        <p>Staff training in Urdu, data migration from your old files, hosting and backups,
+           and a person on WhatsApp when something breaks at 9pm.</p>
+        <div class="tags"><i>Training</i><i>Migration</i><i>Hosting</i><i>Support</i></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══ PRODUCTS ══ -->
+  <section class="wrap sec" id="products">
+    <div class="head rv">
+      <p class="eyebrow amber">Our own products</p>
+      <h2>Built, shipped, running</h2>
+      <p>Not case studies — products we operate ourselves, which is where most of what we
+         know about running software in production came from.</p>
+    </div>
+
+    <div class="prod rv">
+      <div class="prod-item">
+        <span class="badge">Live · Logistics</span>
+        <h3>RoadX</h3>
+        <p>Fleet and dispatch software for Pakistani goods transport companies. Trip
+           sheets, party ledgers, driver records and freight billing — subscription-based,
+           so a transporter with eight trucks can afford the same system as one with eighty.</p>
+        <a href="https://roadx.pk" target="_blank" rel="noopener">roadx.pk
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6z"/></svg>
         </a>
-    </section>
+      </div>
+      <div class="prod-item">
+        <span class="badge">Live · Markets</span>
+        <h3>KTrade</h3>
+        <p>Market and trading tooling — data pipelines, signal dashboards and automation
+           for people who need a screen that updates faster than a spreadsheet can.</p>
+        <a href="https://ktrade.uk" target="_blank" rel="noopener">ktrade.uk
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Services Grid -->
-    <section class="container mx-auto px-6 py-24 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tighter">OUR <span class="text-[#00d2ff]">EXPERTISE</span></h2>
-            </div>
-            <div class="h-[1px] flex-1 bg-gradient-to-r from-white/20 to-transparent hidden md:block ml-8"></div>
+  <!-- ══ COMPLIANCE ══ -->
+  <section class="wrap sec" id="compliance">
+    <div class="split">
+      <div class="head rv" style="margin-bottom:0">
+        <p class="eyebrow amber">Tax &amp; corporate</p>
+        <h2>The paperwork, too</h2>
+        <p>Most software houses hand you a system and leave. We also file the returns.
+           Our founder is a practising taxation professional, so FBR and PRA work is done
+           in-house — not passed to an agent down the road.</p>
+      </div>
+
+      <div class="list rv">
+        <div class="list-row">
+          <h4>NTN &amp; registration</h4>
+          <p>FBR NTN registration for individuals and companies, sales tax registration,
+             and PRA registration for service providers in Punjab.</p>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- Tech Services -->
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-code text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Software Dev</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Next-generation custom software, scalable architectures, and advanced API integrations.</p>
-            </div>
-            
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-laptop-code text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Web Design & Dev</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">High-conversion, extreme-level responsive websites with cutting-edge UI/UX aesthetics.</p>
-            </div>
-
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-network-wired text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">ERP Solutions</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Tailored enterprise resource planning systems to automate and scale your business operations.</p>
-            </div>
-
-            <!-- Creative & Marketing -->
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-bezier-curve text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Creative Studio</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Premium logo designing and professional video editing to build a striking brand identity.</p>
-            </div>
-
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-satellite-dish text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Digital Marketing</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Strategic digital marketing, SEO, and targeted campaigns to maximize your digital footprint.</p>
-            </div>
-
-            <!-- Corporate & Tax -->
-            <div class="glass-panel p-10 rounded-3xl">
-                <i class="fas fa-globe-americas text-3xl text-[#00d2ff] mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Global Formation</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">End-to-end company registration and legal setups across PAK, USA, UK, and UAE.</p>
-            </div>
-
-            <!-- Full Width Tax Banner -->
-            <div class="glass-panel p-10 rounded-3xl md:col-span-2 lg:col-span-3 flex flex-col md:flex-row items-center gap-8 border-[#0b3d91]/50">
-                <div class="h-20 w-20 shrink-0 rounded-full bg-[#0b3d91]/20 flex items-center justify-center border border-[#00d2ff]/30 shadow-[0_0_20px_rgba(0,210,255,0.2)]">
-                    <i class="fas fa-file-invoice-dollar text-3xl text-[#00d2ff]"></i>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-3 uppercase tracking-wider">Tax Consultancies</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-4xl">
-                        Expert tax advisory, corporate tax reconciliations, and strict regulatory compliance services. We navigate the complexities of local and international tax frameworks so you can focus on growth.
-                    </p>
-                </div>
-            </div>
+        <div class="list-row">
+          <h4>Return filing</h4>
+          <p>Annual income tax returns, monthly sales tax returns, withholding statements
+             and wealth statements — filed on time, with the workings explained.</p>
         </div>
-    </section>
-    <!-- About Us Section -->
-    <section id="about" class="container mx-auto px-6 py-24 relative z-10">
-        <div class="glass-panel p-10 md:p-16 rounded-3xl relative overflow-hidden">
-            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#00d2ff]/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="max-w-3xl">
-                <div class="inline-block uppercase tracking-[0.3em] text-xs font-bold text-[#00d2ff] mb-4 border border-[#00d2ff]/30 rounded-full px-4 py-1.5 bg-[#00d2ff]/5">
-                    Who We Are
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 tracking-tighter">ABOUT <span class="text-[#00d2ff]">COBITX</span></h2>
-                <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6 font-light">
-                    <strong>Cobitx Technologies</strong> is an elite digital engineering and corporate consulting powerhouse based in Pakistan. We specialize in transforming complex business challenges into high-performance technological and regulatory solutions.
-                </p>
-                <p class="text-gray-400 text-sm md:text-base leading-relaxed font-light">
-                    From bespoke software development, high-end web designs, and custom enterprise ERP systems to global company formations (PAK, USA, UK, UAE) and expert cross-border tax consultancies—we provide the structural foundation required for modern businesses to dominate global markets.
-                </p>
-            </div>
+        <div class="list-row">
+          <h4>Licensing</h4>
+          <p>Punjab Food Authority licensing and documentation for restaurants, bakeries
+             and food manufacturers.</p>
         </div>
-    </section>
+        <div class="list-row">
+          <h4>Company formation</h4>
+          <p>SECP incorporation in Pakistan, plus LLC and Ltd formation in the USA, UK and
+             UAE with post-registration compliance.</p>
+        </div>
+        <div class="list-row">
+          <h4>Advisory</h4>
+          <p>Tax reconciliation, notice handling, and structuring advice for businesses
+             moving from unregistered to documented operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 mt-20 py-12 relative z-10 bg-[#050505]">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="brand-font text-2xl font-bold tracking-widest">
-                COBIT<span class="text-[#00d2ff]">X</span>
-            </div>
-            <div class="text-gray-600 text-sm text-center font-semibold tracking-wider">
-                &copy; 2026 COBITX TECHNOLOGIES. ALL RIGHTS RESERVED.
-            </div>
-            <div class="flex gap-4">
-                <a href="https://wa.me/923454680844" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#00d2ff] hover:text-black transition-colors">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#00d2ff] hover:text-black transition-colors">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </div>
+  <!-- ══ PROCESS ══ -->
+  <section class="wrap sec">
+    <div class="head rv">
+      <p class="eyebrow">How a project runs</p>
+      <h2>Four steps, no surprises</h2>
+    </div>
+    <div class="steps rv">
+      <div class="step">
+        <span class="n">STEP 01</span>
+        <h4>Sit with your registers</h4>
+        <p>We look at how you actually record things today — the diary, the Excel file, the
+           WhatsApp group. That's the spec.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 02</span>
+        <h4>Fixed scope &amp; quote</h4>
+        <p>Written scope, fixed price, dated timeline. You approve it before anything is
+           built. No hourly surprises.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 03</span>
+        <h4>Build in stages</h4>
+        <p>You see working screens every week and can correct direction early, when
+           correcting is still cheap.</p>
+      </div>
+      <div class="step">
+        <span class="n">STEP 04</span>
+        <h4>Move your data in</h4>
+        <p>Old records migrated, staff trained in Urdu, and support on WhatsApp after
+           go-live — not a handover email.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
+  <section class="wrap sec" id="about">
+    <div class="about">
+      <div class="about-body rv">
+        <p class="eyebrow">Who we are</p>
+        <h2 style="font-size:clamp(28px,4.4vw,50px);font-weight:700;text-transform:uppercase;margin-bottom:26px;letter-spacing:-.02em">About Cobitx</h2>
+        <p><strong>Cobitx Technologies (SMC-Private) Limited</strong> is a registered software
+           house in Muridke, Punjab — about forty kilometres from Lahore, in the middle of the
+           rice, transport and manufacturing belt we mostly build for.</p>
+        <p>That location is not incidental. Most enterprise software sold in Pakistan is
+           written by people who have never stood on a weighbridge or watched a munshi close
+           a day's ledger by hand. We start from the register, not from a feature list, which
+           is why our systems tend to get used after the first month instead of quietly
+           abandoned.</p>
+        <p>We work with clients across Pakistan and internationally in the USA, UK and UAE.
+           Projects run over WhatsApp, email and video calls, with fixed scope and fixed
+           pricing agreed in writing before work starts.</p>
+      </div>
+
+      <aside class="founder rv">
+        <p class="role">Founder &amp; Director</p>
+        <h3>Syed Waqas Asim</h3>
+        <p>Taxation professional and software engineer. Works as an Executive Taxation in the
+           footwear manufacturing sector, and holds an MBA in IT. That combination is the
+           reason Cobitx can build a costing module and file the sales tax return that comes
+           out of it — the two are rarely found in the same office.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="wrap sec" id="faq">
+    <div class="head rv">
+      <p class="eyebrow">Common questions</p>
+      <h2>Straight answers</h2>
+    </div>
+
+    <div class="faq rv">
+      <details open>
+        <summary>What does Cobitx Technologies do?</summary>
+        <p>Cobitx Technologies is a software house based in Muridke, Punjab, Pakistan. We build
+           custom ERP systems for rice mills, goods transport fleets, exporters, shipping agents,
+           factories and educational institutions, and we develop websites, web applications,
+           AI chatbots and trading bots. Alongside software we provide FBR tax registration and
+           return filing, PRA registration, and company formation in Pakistan, the USA, the UK
+           and the UAE.</p>
+      </details>
+      <details>
+        <summary>Where is Cobitx Technologies located?</summary>
+        <p>1, Mall of Muridke, Muridke, Punjab 39530, Pakistan — roughly 40 kilometres from
+           Lahore. We work with clients across Pakistan and internationally, and most projects
+           run remotely over WhatsApp, email and video calls.</p>
+      </details>
+      <details>
+        <summary>How do I contact Cobitx to get software built?</summary>
+        <p>WhatsApp is fastest: +92 345 468 0844. Send a short description of your business and
+           the problem you want solved. We reply with a scope outline, a fixed quotation and a
+           delivery timeline before any work begins.</p>
+      </details>
+      <details>
+        <summary>Do you build ERP software for rice mills and factories?</summary>
+        <p>Yes, and we build them separately rather than selling one generic package. A rice
+           mill system covers paddy intake, drying and milling yield, storage lots, by-products,
+           export batches and costing. A factory system covers bill of materials, batch
+           production, stock consumption, wastage and per-unit costing. Each one is mapped to
+           the registers the client already keeps.</p>
+      </details>
+      <details>
+        <summary>Can you handle FBR tax filing as well as software?</summary>
+        <p>Yes. NTN registration, income tax and sales tax return filing, PRA registration and
+           Punjab Food Authority licensing are handled in-house by a practising taxation
+           professional. Many clients use us for both their systems and their compliance.</p>
+      </details>
+      <details>
+        <summary>How much does a custom system cost, and how long does it take?</summary>
+        <p>It depends on scope, but the process is always the same: we map your workflow first,
+           then give you a written fixed price and a dated timeline before development starts.
+           Smaller systems typically deliver in weeks; a full multi-module ERP takes longer and
+           is delivered in stages so you can use the first part while the rest is built.</p>
+      </details>
+      <details>
+        <summary>Is Cobitx the same as COBIT, the ISACA framework?</summary>
+        <p>No. COBIT is an IT governance framework published by ISACA. Cobitx Technologies is an
+           unrelated software development company in Pakistan. The company name is spelled
+           <strong>Cobitx</strong>, with an x at the end.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <section class="wrap sec">
+    <div class="cta-box rv">
+      <p class="eyebrow" style="justify-content:center">Start here</p>
+      <h2>Tell us what's slowing you down</h2>
+      <p>Describe your business and the part that keeps breaking. You'll get a scope outline,
+         a fixed quotation and a timeline — no charge for the conversation.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="https://wa.me/923454680844" target="_blank" rel="noopener">WhatsApp +92 345 468 0844</a>
+        <a class="btn btn-ghost" href="mailto:info@cobitx.com">info@cobitx.com</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-grid">
+      <div>
+        <span class="nav-word">COBIT<i>X</i></span>
+        <p style="color:var(--muted);font-size:14px;margin-top:14px;max-width:38ch">
+          Software house in Muridke, Punjab. Custom ERP, web and AI development, plus tax
+          filing and company formation.
+        </p>
+        <div class="social">
+          <a href="https://wa.me/923454680844" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.15-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.29-.02-.45.13-.6.13-.13.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.57-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.47s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35M12.04 21.5h-.01a9.42 9.42 0 0 1-4.8-1.32l-.35-.2-3.57.93.96-3.48-.23-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.43 9.45-9.43 2.52 0 4.89.99 6.67 2.77a9.36 9.36 0 0 1 2.76 6.67c0 5.2-4.24 9.44-9.44 9.44M20.5 3.49A11.8 11.8 0 0 0 12.04 0C5.5 0 .18 5.32.18 11.86c0 2.09.55 4.13 1.59 5.93L.08 24l6.36-1.66a11.8 11.8 0 0 0 5.6 1.42h.01c6.53 0 11.85-5.32 11.86-11.86a11.8 11.8 0 0 0-3.41-8.41"/></svg>
+          </a>
+          <a href="https://www.facebook.com/CobitxTechnologies" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07"/></svg>
+          </a>
+          <a href="https://www.instagram.com/CobitxTechnologies" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63 19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0m0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m7.85-10.41a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0"/></svg>
+          </a>
+          <a href="https://x.com/CobitxTech" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@cobitx" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81M9.55 15.57V8.43L15.82 12z"/></svg>
+          </a>
+          <a href="https://www.pinterest.com/CobitxTechnologies" target="_blank" rel="noopener" aria-label="Pinterest">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.43 7.63 11.17-.1-.95-.2-2.4.04-3.44.22-.93 1.4-5.96 1.4-5.96s-.36-.72-.36-1.78c0-1.67.97-2.92 2.17-2.92 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-1 4-.28 1.2.6 2.17 1.78 2.17 2.14 0 3.78-2.25 3.78-5.5 0-2.88-2.07-4.89-5.02-4.89-3.42 0-5.42 2.56-5.42 5.21 0 1.03.4 2.14.9 2.74.1.12.11.22.08.34l-.33 1.36c-.05.22-.17.27-.4.16-1.5-.7-2.43-2.89-2.43-4.65 0-3.78 2.75-7.26 7.93-7.26 4.16 0 7.4 2.97 7.4 6.93 0 4.14-2.6 7.47-6.22 7.47-1.21 0-2.35-.63-2.74-1.38l-.75 2.84c-.27 1.04-1 2.35-1.49 3.15A12 12 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0"/></svg>
+          </a>
         </div>
-    </footer>
+      </div>
+
+      <div>
+        <h5>Services</h5>
+        <div class="foot-links">
+          <a href="#systems">Custom ERP development</a>
+          <a href="#systems">Website &amp; web apps</a>
+          <a href="#systems">AI bots &amp; automation</a>
+          <a href="#compliance">FBR tax filing</a>
+          <a href="#compliance">Company formation</a>
+        </div>
+      </div>
+
+      <div>
+        <h5>Contact</h5>
+        <address>
+          Cobitx Technologies (SMC-Pvt) Ltd<br>
+          1, Mall of Muridke<br>
+          Muridke, Punjab 39530<br>
+          Pakistan<br><br>
+          <a href="https://wa.me/923454680844" target="_blank" rel="noopener">+92 345 468 0844</a><br>
+          <a href="mailto:info@cobitx.com">info@cobitx.com</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="foot-base">
+      <span>&copy; <span id="yr">2026</span> Cobitx Technologies</span>
+      <span>Muridke · Punjab · Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- ticker ---- */
+  var words = ['Rice mill ERP','Transport & fleet','Import & export','Shipping documents',
+               'Production costing','School management','Web applications','AI chatbots',
+               'Trading tools','FBR return filing','SECP registration','Company formation'];
+  var track = document.getElementById('tickerTrack');
+  if (track) {
+    var html = words.map(function(w){ return '<span>' + w + '</span>'; }).join('');
+    track.innerHTML = html + html;          // duplicate = seamless loop
+  }
+
+  /* ---- signature console ---- */
+  var systems = [
+    { tag:'ERP · Logistics', name:'Fleet & dispatch', who:'Goods transport companies',
+      rows:[['Open trips today','LIVE'],['Driver & vehicle records','LINKED'],
+            ['Party ledger balance','AUTO'],['Freight invoice','1-CLICK']] },
+    { tag:'ERP · Agri', name:'Rice mill control', who:'Rice mills & paddy processors',
+      rows:[['Paddy intake / weighbridge','LOGGED'],['Milling yield %','TRACKED'],
+            ['Storage lot position','LIVE'],['Cost per bag','COMPUTED']] },
+    { tag:'ERP · Trade', name:'Export desk', who:'Exporters & shipping agents',
+      rows:[['Contract to shipment','MAPPED'],['Container & B/L status','TRACKED'],
+            ['LC terms & expiry','ALERTED'],['Bank realisation','MATCHED']] },
+    { tag:'SaaS · Education', name:'Campus office', who:'Schools, colleges, universities',
+      rows:[['Fee challans issued','BULK'],['Defaulter list','AUTO'],
+            ['Result cards','GENERATED'],['Parent portal','ENABLED']] },
+    { tag:'Compliance', name:'Tax & filing', who:'Registered businesses in Pakistan',
+      rows:[['Sales tax return','MONTHLY'],['Income tax return','ANNUAL'],
+            ['Withholding statement','ON TIME'],['Notice handling','IN-HOUSE']] }
+  ];
+
+  var panel = document.getElementById('conPanel'),
+      scan  = document.getElementById('conScan'),
+      dots  = document.getElementById('conDots'),
+      idxEl = document.getElementById('conIndex'),
+      cur   = 0, timer = null;
+
+  function esc(s){ return String(s).replace(/[&<>]/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]; }); }
+
+  function paint(i){
+    var s = systems[i];
+    panel.innerHTML =
+      '<p class="con-tag">' + esc(s.tag) + '</p>' +
+      '<p class="con-name">' + esc(s.name) + '</p>' +
+      '<p class="con-for">' + esc(s.who) + '</p>' +
+      '<div class="con-rows">' +
+        s.rows.map(function(r){
+          return '<div class="con-row"><span class="k">' + esc(r[0]) +
+                 '</span><span class="v">' + esc(r[1]) + '</span></div>';
+        }).join('') +
+      '</div>';
+
+    idxEl.textContent = ('0' + (i + 1)).slice(-2);
+    Array.prototype.forEach.call(dots.children, function(d, n){
+      d.setAttribute('aria-current', n === i ? 'true' : 'false');
+    });
+
+    if (!reduce) {                       // scanline sweep on switch
+      scan.classList.remove('run');
+      void scan.offsetWidth;             // reflow -> animation restart
+      scan.classList.add('run');
+    }
+  }
+
+  function go(i, manual){
+    cur = (i + systems.length) % systems.length;
+    paint(cur);
+    if (manual) restart();
+  }
+  function restart(){
+    clearInterval(timer);
+    if (!reduce) timer = setInterval(function(){ go(cur + 1); }, 4600);
+  }
+
+  systems.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.className = 'con-dot';
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', s.name);
+    b.addEventListener('click', function(){ go(i, true); });
+    dots.appendChild(b);
+  });
+
+  paint(0);
+  restart();
+
+  // Tab background mein ho to timer band — battery aur CPU bachta hai
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) clearInterval(timer); else restart();
+  });
+
+  /* ---- scroll reveal ---- */
+  var items = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(items, function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    Array.prototype.forEach.call(items, function(el){ io.observe(el); });
+  }
+})();
+</script>
 </body>
 </html>

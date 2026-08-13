@@ -1,0 +1,35 @@
+# Cobitx Technologies — https://cobitx.com
+
+User-agent: *
+Allow: /
+
+# AI crawlers — inhe explicitly allow karna zaroori hai, warna aapki site
+# ChatGPT / Claude / Perplexity ke jawabon mein source nahi ban sakti.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://cobitx.com/sitemap.xml
