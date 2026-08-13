@@ -204,6 +204,11 @@
   --maxw:1300px;
   --r:20px;
   --ease:cubic-bezier(.16,1,.3,1);
+
+  /* Logo plate — inhe tweak karke feather ki shiddat badal sakte hain */
+  --pl-x:19px;   /* left/right bleed  */
+  --pl-y:10px;   /* top/bottom bleed  */
+  --pl-b:7px;    /* feather softness  */
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -316,6 +321,33 @@ p{margin:0}
   border:1px solid var(--edge);box-shadow:var(--spec),0 20px 50px -26px rgba(0,0,0,.95)}
 @media(max-width:900px){.nav-in{margin-inline:12px}}
 .nav-logo{height:32px;width:auto;object-fit:contain}
+
+/* ── LOGO PLATE ───────────────────────────────────────────
+   Logo navy+cyan hai; obsidian background par navy ghul jata
+   tha. Solid white box sticker jaisa lagta, isliye radial
+   gradient + blur se feathered halo — edges bilkul soft, aur
+   bahar ki taraf halka warm tint taake copper theme se mile.
+   Plate hatana ho (light logo aa jaye to): brand link par
+   class "no-plate" laga dein.
+   ───────────────────────────────────────────────────────── */
+.brand{display:flex;align-items:center}
+.plate{position:relative;display:inline-flex;align-items:center;padding:3px 5px}
+.plate::before{
+  content:'';position:absolute;pointer-events:none;border-radius:999px;
+  top:calc(-1 * var(--pl-y));bottom:calc(-1 * var(--pl-y));
+  left:calc(-1 * var(--pl-x));right:calc(-1 * var(--pl-x));
+  background:radial-gradient(58% 122% at 50% 50%,
+    rgba(255,255,255,.97) 0%,
+    rgba(255,254,252,.94) 36%,
+    rgba(255,245,233,.56) 62%,
+    rgba(255,233,208,.17) 79%,
+    rgba(255,227,197,0) 92%);
+  filter:blur(var(--pl-b));
+  transition:filter .45s var(--ease),transform .45s var(--ease);
+}
+.plate>img{position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.10))}
+.brand:hover .plate::before{filter:blur(calc(var(--pl-b) + 3px));transform:scale(1.04)}
+.brand.no-plate .plate::before{display:none}
 .wordmark{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.02em}
 .wordmark i{font-style:normal;background:linear-gradient(90deg,var(--copper),var(--gold));
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -585,9 +617,11 @@ p{margin:0}
 
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="/" aria-label="Cobitx Technologies home" style="display:flex;align-items:center">
-      <img src="logo.png" alt="Cobitx Technologies" class="nav-logo" width="132" height="32"
-           onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',innerHTML:'COBIT<i>X</i>'}))">
+    <a class="brand" href="/" aria-label="Cobitx Technologies home">
+      <span class="plate">
+        <img src="logo.png" alt="Cobitx Technologies" class="nav-logo" width="132" height="32"
+             onerror="this.closest('.plate').replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',innerHTML:'COBIT<i>X</i>'}))">
+      </span>
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#products">Products</a>
