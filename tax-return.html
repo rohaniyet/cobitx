@@ -455,6 +455,9 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
             <button type="submit" class="btn btn-fill" id="send">Submit my details</button>
             <a class="btn btn-line" href="https://wa.me/923454680844?text=Assalam%20o%20Alaikum%2C%20I%20need%20help%20filing%20my%20tax%20return" target="_blank" rel="noopener">Ask on WhatsApp first</a>
           </div>
+          <p class="hint" style="margin:14px 0 0">Sending takes 20 to 60 seconds because your
+             documents are uploaded one by one. Please stay on this page until you see the
+             confirmation — pressing the button twice creates two files.</p>
           <p class="status" id="status" style="margin-top:12px"></p>
         </div>
       </div>
@@ -905,8 +908,10 @@ const readFile=f=>new Promise((res,rej)=>{
   r.onerror=rej; r.readAsDataURL(f);
 });
 
+let REF='';
 $('taxform').addEventListener('submit',async ev=>{
   ev.preventDefault();
+  REF='';
   const st=$('status'); st.className='status'; st.textContent='';
 
   if(!CAT){st.className='status bad';st.textContent='Please choose your case first.';
@@ -938,7 +943,7 @@ $('taxform').addEventListener('submit',async ev=>{
 
   const btn=$('send'); btn.disabled=true;
   btn.innerHTML='<span class="spin"></span> Sending…';
-  st.className='status'; st.textContent='Uploading your details and documents. Please keep this page open.';
+  st.className='status'; st.textContent='Starting upload — this usually takes 20 to 60 seconds. Please keep this page open.';
 
   try{
     if(ENDPOINT.indexOf('PASTE_YOUR')===0) throw new Error('not-configured');
@@ -953,8 +958,9 @@ $('taxform').addEventListener('submit',async ev=>{
       labels[f.id]={section:sec.title,label:f.label};
     }));
 
-    const ref='CBX-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+
-              String(Math.floor(Math.random()*9000)+1000);
+    REF='CBX-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+
+        String(Math.floor(Math.random()*9000)+1000);
+    const ref=REF;
 
     const payload={
       token:SHARED_TOKEN, hp:$('company_url').value,
@@ -965,7 +971,24 @@ $('taxform').addEventListener('submit',async ev=>{
       labels, data, files
     };
 
-    const r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
+    let step=0;
+    const stages=[
+      'Uploading your documents…',
+      'Saving your file…',
+      'Preparing your working…',
+      'Almost there — sending it to our tax desk…',
+      'Still working. Please keep this page open.'
+    ];
+    st.textContent=stages[0]+'  Please do not close this page.';
+    const tick=setInterval(()=>{
+      step=Math.min(step+1,stages.length-1);
+      st.textContent=stages[step]+'  Please do not close this page.';
+    },9000);
+
+    let r;
+    try{
+      r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(payload)});
+    } finally { clearInterval(tick); }
     const out=await r.json().catch(()=>({ok:r.ok}));
     if(!out.ok) throw new Error(out.error||'server');
 
@@ -980,7 +1003,8 @@ $('taxform').addEventListener('submit',async ev=>{
     st.className='status bad';
     st.textContent=(err.message==='not-configured')
       ? 'Online submission is being set up. Please send your documents on WhatsApp at +92 345 468 0844 — we will reply straight away.'
-      : 'We could not send the form just now. Please check your connection and try again, or send everything on WhatsApp at +92 345 468 0844.';
+      : 'We could not confirm your submission. Please do not send it twice — message us on WhatsApp at +92 345 468 0844 with reference ' + REF +
+        ' and we will check whether it reached us.';
   }
 });
 </script>
