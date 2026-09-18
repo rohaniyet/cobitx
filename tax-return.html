@@ -189,18 +189,18 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 .callout.warn{border-color:rgba(255,210,122,.3);background:rgba(255,210,122,.07);color:#F5E4C2}
 .callout b{color:#fff}
 
-/* fee meter */
-.meter{position:sticky;bottom:0;z-index:40;margin-top:28px;
-  border-radius:14px;padding:16px 20px;display:flex;flex-wrap:wrap;gap:8px 20px;
-  align-items:center;justify-content:space-between;
-  border:1px solid rgba(62,224,160,.3);background:rgba(10,24,19,.94);
-  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.meter .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+/* fee strip + fee box */
+.feestrip{margin-top:20px;padding:15px 20px;border-radius:13px;display:flex;flex-wrap:wrap;
+  gap:6px 16px;align-items:baseline;border:1px solid rgba(62,224,160,.28);
+  background:rgba(62,224,160,.07);font-size:13.5px;color:var(--titanium);line-height:1.55}
+.feestrip b{font-family:var(--display);font-size:15px;color:var(--platinum);letter-spacing:-.02em}
+.feebox{padding:18px 22px;border-radius:14px;border:1px solid rgba(255,210,122,.3);
+  background:rgba(255,210,122,.07);display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
+.feebox .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
   text-transform:uppercase;color:var(--dim);display:block}
-.meter .amt{font-family:var(--display);font-weight:700;font-size:27px;letter-spacing:-.04em;color:var(--jade)}
-.meter .why{font-size:12.5px;color:var(--titanium);max-width:46ch}
-@media(max-width:620px){.meter{padding:12px 16px;gap:4px 14px}
-  .meter .amt{font-size:22px}.meter .why{font-size:11.5px;line-height:1.45}}
+.feebox .amt{font-family:var(--display);font-weight:700;font-size:30px;letter-spacing:-.04em;
+  color:var(--gold);display:block;line-height:1.1}
+.feebox .why{font-size:13px;color:var(--titanium);max-width:44ch}
 
 /* documents */
 .docs{display:grid;gap:9px;margin-bottom:6px}
@@ -308,10 +308,11 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 <section class="wrap hero">
   <span class="eyebrow">Tax year 2026 · 1 July 2025 – 30 June 2026</span>
   <h1>File your income tax return <span class="molten">without leaving your chair</span></h1>
-  <p class="lede">Pick your case, fill one form, attach your documents and pay the fee. We prepare
-     the computation, file the return and the wealth statement on FBR IRIS, and send you the
-     acknowledgement and the updated Active Taxpayer status. No office visit, no agent in between.
-     Due date for tax year 2026 is <strong style="color:var(--gold)">30 September</strong>.</p>
+  <p class="lede">Pick your case, answer a few short questions and attach your documents — we read
+     the figures off the documents ourselves. We prepare the computation, file the return and the
+     wealth statement on FBR IRIS, and send you the acknowledgement and the updated Active Taxpayer
+     status. No office visit, no agent in between. Due date for tax year 2026 is
+     <strong style="color:var(--gold)">30 September</strong>.</p>
 </section>
 
 <!-- ══════════ FEES ══════════ -->
@@ -359,9 +360,9 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 
 <!-- ══════════ FORM ══════════ -->
 <section class="wrap sec" id="form">
-  <h2 class="h2">Your details</h2>
-  <p class="sub">Everything below goes straight to our tax desk. Fill what applies to you — if a
-     figure is zero or does not apply, leave it blank.</p>
+  <h2 class="h2">Start your return</h2>
+  <p class="sub">Six or seven short questions, then your documents. We read the figures off the
+     documents ourselves — you do not have to add anything up.</p>
 
   <div class="glass formwrap" id="card">
     <form id="taxform" novalidate>
@@ -369,7 +370,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
       <!-- category picker -->
       <div class="fsec">
         <h3><span class="n">01</span>Which case are you?</h3>
-        <p class="hint">This decides the form you see below and the fee that applies.</p>
+        <p class="hint">This decides the few questions you are asked and the fee that applies.</p>
         <div class="picker" id="picker">
           <label class="opt" data-v="salaried">
             <input type="radio" name="category" value="salaried">
@@ -398,6 +399,9 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
         <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off">
       </div>
 
+      <!-- fee for the chosen case, shown as soon as one is picked -->
+      <div class="feestrip hide" id="feestrip"></div>
+
       <!-- dynamic sections render here -->
       <div id="fields" class="hide"></div>
 
@@ -406,7 +410,9 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 
         <div class="fsec">
           <h3><span class="n" id="n-docs">05</span>Documents to attach</h3>
-          <p class="hint">Clear photos from your phone are fine. PDF, JPG, PNG, Excel and Word are all accepted.</p>
+          <p class="hint">This is where your figures come from, so attach what you can. Clear phone
+             photos are fine — PDF, JPG, PNG, Excel and Word are all accepted. Anything you cannot
+             find right now, send us on WhatsApp later.</p>
           <div class="docs" id="doclist"></div>
           <label class="drop" id="drop">
             <input type="file" id="files" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.xls,.xlsx,.doc,.docx,.csv">
@@ -418,8 +424,11 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
         </div>
 
         <div class="fsec">
-          <h3><span class="n" id="n-pay">06</span>Fee payment</h3>
-          <p class="hint">Pay the fee shown at the bottom of this page, then attach the screenshot above.</p>
+          <h3><span class="n" id="n-pay">06</span>Fee and payment</h3>
+          <div class="feebox" id="feebox"></div>
+          <p class="hint" style="margin:18px 0 12px">
+            <strong style="color:var(--platinum)">Send your fee to this account</strong>, then attach
+            the payment screenshot with your documents above.</p>
           <div class="bank">
             <div class="bline"><span class="k">Bank</span><span class="v">Bank Alfalah Limited</span><span></span></div>
             <div class="bline"><span class="k">Account title</span><span class="v">Cobitx Technologies</span>
@@ -428,7 +437,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
               <button type="button" class="cpy" data-cp="PK38ALFH0136001011322304">Copy</button></div>
           </div>
           <div class="callout warn" style="margin-top:14px">
-            <b>Please note.</b> Transfer only the fee amount shown below. Write your CNIC in the
+            <b>Please note.</b> Transfer only the fee amount shown above. Write your CNIC in the
             transfer remarks if your app allows it, and attach the payment screenshot with your
             documents. Work starts once the payment is confirmed. Government challans, if any, are
             paid by you separately on FBR's own portal — we never collect tax money.
@@ -460,15 +469,6 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
              confirmation — pressing the button twice creates two files.</p>
           <p class="status" id="status" style="margin-top:12px"></p>
         </div>
-      </div>
-
-      <!-- live fee meter -->
-      <div class="meter hide" id="meter">
-        <div>
-          <span class="lab">Your fee</span>
-          <span class="amt" id="feeAmt">—</span>
-        </div>
-        <span class="why" id="feeWhy">Choose your case above.</span>
       </div>
     </form>
   </div>
@@ -550,203 +550,133 @@ const MAX_TOTAL = 18 * 1024 * 1024;
 document.getElementById('yr').textContent = new Date().getFullYear();
 
 /* ---------- field helpers ---------- */
+/* The documents carry the numbers. We only ask what no document can tell us:
+   who you are, how to reach you, and the one band that sets the fee.        */
 const t=(id,label,o={})=>({id,label,type:'text',...o});
-const n=(id,label,o={})=>({id,label,type:'number',...o});
 const a=(id,label,o={})=>({id,label,type:'textarea',wide:true,...o});
-const s=(id,label,options,o={})=>({id,label,type:'select',options,...o});
+const s_=(id,label,options,o={})=>({id,label,type:'select',options,...o});
 
 const YEARS=['2026 (1 Jul 2025 – 30 Jun 2026)','2025 (1 Jul 2024 – 30 Jun 2025)','2024 (1 Jul 2023 – 30 Jun 2024)'];
 
-/* ---------- shared sections ---------- */
-const PERSONAL={title:'Your identity',hint:'Exactly as printed on your CNIC — a mismatch is the most common reason IRIS rejects a registration.',fields:[
-  t('name','Full name (as on CNIC)',{req:true,ph:'Syed Waqas Asim'}),
-  t('cnic','CNIC number',{req:true,ph:'35202-1234567-1',tip:'13 digits, with or without dashes'}),
-  t('father','Father / husband name',{req:true}),
-  t('dob','Date of birth',{type:'date'}),
-  t('mobile','Mobile number (WhatsApp)',{req:true,ph:'0345 4680844',tip:'For a new FBR registration this SIM must be in your own name'}),
-  t('email','Email address',{type:'email',req:true,ph:'you@example.com'}),
-  a('address','Residential address',{req:true,ph:'House / street, area, city'}),
-  s('taxyear','Tax year to file',YEARS,{req:true}),
-]};
+const YOU={title:'About you',
+  hint:'Only what is needed to find you on IRIS and reach you. Everything else we read from your documents.',
+  fields:[
+    t('name','Full name (as on CNIC)',{req:true,ph:'Syed Waqas Asim'}),
+    t('cnic','CNIC number',{req:true,ph:'35202-1234567-1'}),
+    t('mobile','WhatsApp number',{req:true,ph:'0345 4680844',tip:'Your computation and updates come here'}),
+    t('email','Email address',{type:'email',req:true,ph:'you@example.com'}),
+    s_('taxyear','Tax year to file',YEARS,{req:true}),
+    s_('fbr_registered','Are you already registered with FBR?',
+       ['Yes — I have an NTN','No — please register me first'],{req:true}),
+    t('iris_password','IRIS password (optional)',{type:'password',
+      showIf:['fbr_registered','Yes — I have an NTN'],
+      tip:'Leave it blank if you prefer — we will ask for it on WhatsApp when we are ready to file.'}),
+  ]};
 
-const FBR={title:'Your FBR status',hint:'If you have never filed before, choose "Not registered yet" — registration is included in the fee.',fields:[
-  s('fbr_registered','Are you registered with FBR (do you have an NTN)?',['Yes — already registered','Not registered yet — please register me'],{req:true}),
-  t('ntn','NTN number',{showIf:['fbr_registered','Yes — already registered'],tip:'For an individual this is normally your CNIC without dashes'}),
-  t('iris_id','IRIS login ID',{showIf:['fbr_registered','Yes — already registered'],ph:'usually your CNIC'}),
-  t('iris_password','IRIS password (optional)',{type:'password',showIf:['fbr_registered','Yes — already registered'],
-     tip:'Leave this blank if you prefer. We will request it on WhatsApp when we are ready to file.'}),
-  s('filed_before','Have you filed a return before?',['Yes, last year','Yes, but not every year','No, this is my first return']),
-  n('prev_wealth','Net wealth declared in your last return (PKR)',{tip:'Leave blank if this is your first return'}),
-]};
+const SALARIED={title:'Your case',
+  hint:'Two questions. Your salary figures and tax deducted come from the salary certificate.',
+  fields:[
+    t('employer_name','Employer name',{req:true}),
+    s_('wealth_band','Roughly, what is your total net wealth?',
+       ['Below Rs. 10 million','Rs. 10 million or more'],{req:true,fee:true,
+        tip:'Property, vehicles, bank balance, gold and investments, minus loans. An approximate band is enough — it only decides the fee.'}),
+  ]};
 
-const OTHER_INCOME={title:'Other income during the year',hint:'Only fill what applies. Bank profit, rent, dividend and capital gain all have to be declared even where tax was already deducted.',fields:[
-  n('inc_profit_debt','Profit on debt / bank profit (PKR)'),
-  n('tax_profit_debt','Tax deducted on that profit (PKR)'),
-  n('inc_rent','Rental income from property (PKR)'),
-  n('tax_rent','Tax deducted on rent (PKR)'),
-  n('inc_dividend','Dividend received (PKR)'),
-  n('tax_dividend','Tax deducted on dividend (PKR)'),
-  n('inc_capital_gain','Capital gain — shares or property (PKR)'),
-  n('inc_agri','Agricultural income (PKR)'),
-  n('inc_foreign_remit','Foreign remittance received (PKR)'),
-  a('inc_other','Any other income — please describe'),
-]};
+const SAL_BIZ={title:'Your case',
+  hint:'A few lines about the business. The figures come from your sales summary and bank statement.',
+  fields:[
+    t('employer_name','Employer name',{req:true}),
+    t('biz_name','Business name',{req:true}),
+    t('biz_nature','Nature of business',{req:true,ph:'general store, cloth trading, freelancing, commission agency…'}),
+    s_('turnover_band','Roughly, what was your annual turnover?',
+       ['Below Rs. 5 million','Rs. 5 million or more'],{req:true,fee:true,
+        tip:'Total sales for the year. An approximate band is enough — it only decides the fee.'}),
+  ]};
 
-const TAX_PAID={title:'Tax already deducted from you',hint:'These are adjustable against your liability and are the reason many salaried people get a refund. Your bank certificate and mobile bill show most of them.',fields:[
-  n('tax_mobile','Withholding on mobile / internet bills (PKR)'),
-  n('tax_vehicle','Vehicle token tax and registration WHT (PKR)'),
-  n('tax_electricity','Withholding on electricity bill (PKR)'),
-  n('tax_banking','Cash withdrawal / banking transaction tax (PKR)'),
-  n('tax_property','WHT on property purchase or sale — 236C / 236K (PKR)'),
-  n('tax_education','Withholding on education fee — 236I (PKR)'),
-  n('tax_other','Any other tax deducted (PKR)'),
-]};
+const NON_RES={title:'Your case',
+  hint:'Residential status is decided by days spent in Pakistan, not by which passport you hold.',
+  fields:[
+    t('nr_country','Country you live in',{req:true,ph:'Saudi Arabia, UAE, United Kingdom…'}),
+    s_('nr_days','Days you spent in Pakistan during this tax year',
+       ['Less than 183 days','183 days or more'],{req:true,
+        tip:'Under 183 days makes you a non-resident. At 183 or more you are taxed as a resident — tell us and we will guide you.'}),
+  ]};
 
-const WEALTH={title:'Wealth statement as at 30 June',hint:'Required by law for every resident filer under section 116. Give cost, not market value — FBR records assets at cost.',fields:[
-  a('w_property','Immovable property — location, size, year bought',{ph:'e.g. 10 marla house, Model Town Muridke, bought 2021'}),
-  n('w_property_value','Total cost of immovable property (PKR)'),
-  a('w_vehicle','Vehicles — make, model, registration number',{ph:'e.g. Toyota Corolla 2019, LEB-1234'}),
-  n('w_vehicle_value','Total cost of vehicles (PKR)'),
-  a('w_bank','Bank accounts — bank name, account number, balance on 30 June'),
-  n('w_bank_value','Total bank balance on 30 June (PKR)'),
-  n('w_cash','Cash in hand (PKR)'),
-  n('w_investment','Investments — shares, prize bonds, certificates, insurance (PKR)'),
-  n('w_gold','Gold and jewellery, at cost (PKR)'),
-  n('w_receivable','Loans or advances given to others (PKR)'),
-  n('w_household','Household effects and furniture (PKR)'),
-  n('w_foreign','Assets held outside Pakistan (PKR)'),
-  n('w_liability','Loans and liabilities payable (PKR)'),
-  n('personal_expense','Personal and household expenses for the year (PKR)',{tip:'Rent, utilities, education, travel, medical, functions — an honest estimate'}),
-  n('total_wealth','TOTAL net wealth (assets minus liabilities)',{req:true,fee:true,
-     tip:'This figure decides your fee: below Rs. 10,000,000 the fee is Rs. 2,000, at or above it the fee is Rs. 5,000'}),
-]};
+const EXTRA={title:'Anything we should know?',
+  hint:'Optional. One or two lines is plenty — it saves us a round of questions later.',
+  fields:[
+    a('notes','Notes for our tax desk',
+      {ph:'e.g. bought a plot this year, sold a car, received an FBR notice, first time filing, salary changed mid-year…'}),
+  ]};
 
-const EMPLOYMENT={title:'Your employment',hint:'Take these figures from the salary certificate your employer issues after 30 June.',fields:[
-  t('employer_name','Employer name',{req:true}),
-  t('employer_ntn','Employer NTN',{tip:'On your salary certificate'}),
-  t('designation','Your designation'),
-  t('employment_period','Period of employment in the tax year',{ph:'e.g. full year, or Jul 2025 – Feb 2026'}),
-  n('salary_gross','Annual gross salary (PKR)',{req:true,tip:'Basic + allowances + bonus, before tax'}),
-  n('salary_exempt','Exempt portion, if any (PKR)',{tip:'Gratuity, leave encashment on retirement, etc.'}),
-  n('salary_tax_deducted','Income tax deducted by employer (PKR)',{req:true}),
-  n('salary_provident','Employee provident fund contribution (PKR)'),
-]};
+/* ---------- documents — these carry the actual data ---------- */
+const DOC_CNIC=['CNIC — front and back','A clear phone photo is fine'];
+const DOC_PAY=['Screenshot of the fee payment','From the bank details further down this page'];
+const DOC_LAST=['Last year\u2019s return and wealth statement','If you have filed before — it saves a lot of back and forth'];
 
-const BUSINESS={title:'Your business',hint:'One line per figure from your own books or bank statement. If you do not keep formal accounts, give your best honest estimate and we will build the statement with you.',fields:[
-  t('biz_name','Business / firm name',{req:true}),
-  t('biz_nature','Nature of business',{req:true,ph:'e.g. general store, cloth trading, freelancing, commission agency'}),
-  a('biz_address','Business address',{req:true}),
-  t('biz_ntn','Business NTN / STRN, if separate'),
-  s('biz_type','How is the business held?',['Sole proprietor','Partnership / AOP share','Freelance or online services','Commission / brokery']),
-  n('biz_turnover','Annual turnover / total sales (PKR)',{req:true,fee:true,
-     tip:'This figure decides your fee: below Rs. 5,000,000 the fee is Rs. 5,000, at or above it the fee is Rs. 10,000'}),
-  n('biz_cost_of_sales','Cost of sales / purchases (PKR)'),
-  n('biz_gross_profit','Gross profit (PKR)'),
-  n('biz_expenses','Business expenses — rent, salaries, utilities, freight (PKR)'),
-  n('biz_net_profit','Net profit for the year (PKR)',{req:true}),
-  n('biz_opening_stock','Opening stock at 1 July (PKR)'),
-  n('biz_closing_stock','Closing stock at 30 June (PKR)'),
-  n('biz_debtors','Amount receivable from customers (PKR)'),
-  n('biz_creditors','Amount payable to suppliers (PKR)'),
-  n('biz_capital','Capital invested in the business at 30 June (PKR)'),
-  n('biz_tax_deducted','Tax deducted or collected on the business (PKR)',{tip:'Sections 153, 236G, 236H and similar — your suppliers deduct these'}),
-]};
-
-const NR_STATUS={title:'Your residence abroad',hint:'Residential status is decided by days, not by passport. Under 183 days in Pakistan in the tax year makes you a non-resident.',fields:[
-  t('nr_country','Country you live in',{req:true,ph:'e.g. Saudi Arabia, UAE, United Kingdom'}),
-  n('nr_days','Days you stayed in Pakistan during the tax year',{req:true,tip:'Must be below 183 for non-resident status. Count every calendar day, arrivals and departures included.'}),
-  s('nr_basis','Your status in that country',['Work visa / employment','Iqama','Permanent residence','Citizenship / dual national','Student','Business owner abroad']),
-  t('nr_passport','Passport or NICOP number'),
-  t('nr_occupation','Your occupation abroad'),
-  n('nr_remittance','Remittances you sent to Pakistan during the year (PKR)',{tip:'Only through banking channels. Keep the bank credit advice — it is your proof under section 111(4).'}),
-  t('nr_remit_bank','Bank(s) in Pakistan where the remittance landed'),
-  s('nr_why','Why are you filing?',['To stay on the Active Taxpayer List','I own property in Pakistan','I have rental or bank income in Pakistan','I received a notice from FBR','Other reason']),
-]};
-
-const NR_PK_INCOME={title:'Your Pakistan-source income',hint:'Only income that arises in Pakistan is taxed here. Salary or business income you earn abroad is not, but we still record the remittance.',fields:[
-  n('pk_rent','Rental income from property in Pakistan (PKR)'),
-  n('pk_tax_rent','Tax deducted on that rent (PKR)'),
-  n('pk_profit_debt','Profit on debt from Pakistani banks (PKR)'),
-  n('pk_tax_profit','Tax deducted on that profit (PKR)'),
-  n('pk_dividend','Dividend from Pakistani companies (PKR)'),
-  n('pk_capital_gain','Capital gain on property or shares in Pakistan (PKR)'),
-  n('pk_salary','Any salary drawn in Pakistan (PKR)'),
-  a('pk_other','Any other Pakistan income — please describe'),
-]};
-
-const NR_ASSETS={title:'Your assets in Pakistan as at 30 June',hint:'A non-resident declares assets held in Pakistan. Foreign assets are not required, but declaring them protects a future remittance from question.',fields:[
-  a('w_property','Immovable property in Pakistan — location, size, year bought'),
-  n('w_property_value','Total cost of that property (PKR)'),
-  a('w_vehicle','Vehicles registered in Pakistan — make, model, registration number'),
-  n('w_vehicle_value','Total cost of those vehicles (PKR)'),
-  a('w_bank','Pakistani bank accounts — bank, account number, balance on 30 June'),
-  n('w_bank_value','Total balance in Pakistani accounts (PKR)'),
-  n('w_investment','Investments in Pakistan — shares, certificates, funds (PKR)'),
-  n('w_receivable','Amounts receivable in Pakistan (PKR)'),
-  n('w_liability','Loans or liabilities in Pakistan (PKR)'),
-  n('total_wealth','Total net assets held in Pakistan (PKR)'),
-]};
-
-/* ---------- category map ---------- */
 const CATS={
   salaried:{
     label:'Salaried person',
-    sections:[PERSONAL,FBR,EMPLOYMENT,OTHER_INCOME,TAX_PAID,WEALTH],
-    fee:d=>{const w=num(d.total_wealth);
-      return w>=10000000
-        ? {amt:5000,why:'Salaried person with net wealth of Rs. 10 million or more.'}
-        : {amt:2000,why:'Salaried person with net wealth below Rs. 10 million.'};},
+    band:'Rs. 2,000 if your net wealth is below Rs. 10 million, Rs. 5,000 if it is Rs. 10 million or more.',
+    sections:[YOU,SALARIED,EXTRA],
+    fee:d=>d.wealth_band==='Rs. 10 million or more'
+      ? {amt:5000,why:'Salaried person with net wealth of Rs. 10 million or more.'}
+      : {amt:2000,why:'Salaried person with net wealth below Rs. 10 million.'},
     docs:[
-      ['CNIC','Front and back, clearly readable'],
-      ['Salary certificate for the tax year','Issued by your employer after 30 June. A June salary slip works if no certificate is available.'],
-      ['Bank statement 1 July to 30 June','Every account in your name, including dormant ones'],
-      ['Tax deduction certificate from your bank','Shows withholding on profit and cash withdrawals'],
-      ['Property documents','Registry, allotment letter or sale deed, if you own property'],
-      ['Vehicle registration book','If you own a vehicle'],
-      ['Last year’s return and wealth statement','If you have filed before — it saves a lot of back and forth'],
-      ['Payment screenshot','Of the service fee, from the bank details below'],
+      DOC_CNIC,
+      ['Salary certificate for the tax year','Your employer issues it after 30 June. All twelve salary slips work too.'],
+      ['Bank statement, 1 July to 30 June','Every account in your name, including ones you barely use'],
+      ['Tax deduction certificate from your bank','Shows withholding on profit and on cash withdrawals'],
+      ['Tax deduction certificates, if any','Mobile or internet bill, vehicle token, electricity bill, school fee'],
+      ['Property documents','Registry, allotment letter or sale deed — if you own property'],
+      ['Vehicle registration book','If a vehicle is in your name'],
+      ['Investment proofs','Shares, prize bonds, savings certificates, insurance or pension — if you hold any'],
+      DOC_LAST,
+      DOC_PAY,
     ]},
+
   salaried_business:{
     label:'Salary + business income',
-    sections:[PERSONAL,FBR,EMPLOYMENT,BUSINESS,OTHER_INCOME,TAX_PAID,WEALTH],
-    fee:d=>{const tv=num(d.biz_turnover);
-      return tv>=5000000
-        ? {amt:10000,why:'Salary plus business income with turnover of Rs. 5 million or more.'}
-        : {amt:5000,why:'Salary plus business income with turnover below Rs. 5 million.'};},
+    band:'Rs. 5,000 if your turnover is below Rs. 5 million, Rs. 10,000 if it is Rs. 5 million or more.',
+    sections:[YOU,SAL_BIZ,EXTRA],
+    fee:d=>d.turnover_band==='Rs. 5 million or more'
+      ? {amt:10000,why:'Salary plus business income with turnover of Rs. 5 million or more.'}
+      : {amt:5000,why:'Salary plus business income with turnover below Rs. 5 million.'},
     docs:[
-      ['CNIC','Front and back, clearly readable'],
+      DOC_CNIC,
       ['Salary certificate for the tax year','From your employer'],
-      ['Business sales and purchase summary','Month by month if you have it, or a yearly total'],
-      ['Business bank statement 1 July to 30 June','All business accounts'],
-      ['Personal bank statement 1 July to 30 June','All personal accounts'],
-      ['Stock statement at 30 June','Closing inventory at cost'],
-      ['Expense summary','Rent, salaries, utilities, freight and other business expenses'],
-      ['Sales tax returns','If you are registered for sales tax or PRA'],
-      ['Property and vehicle documents','If you own any'],
-      ['Last year’s return and wealth statement','If you have filed before'],
-      ['Payment screenshot','Of the service fee, from the bank details below'],
+      ['Sales and purchase summary','Month by month if you have it, otherwise the yearly totals — a WhatsApp photo of your register is fine'],
+      ['Expense summary','Rent, salaries, utilities, freight and anything else the business paid for'],
+      ['Closing stock at 30 June','What was left in the shop or godown, at cost'],
+      ['Business bank statement, 1 July to 30 June','All business accounts'],
+      ['Personal bank statement, 1 July to 30 June','All personal accounts'],
+      ['Sales tax returns','If you are registered for sales tax or with PRA'],
+      ['Property and vehicle documents','If anything is in your name'],
+      DOC_LAST,
+      DOC_PAY,
     ]},
+
   non_resident:{
     label:'Non-resident Pakistani',
-    sections:[PERSONAL,FBR,NR_STATUS,NR_PK_INCOME,TAX_PAID,NR_ASSETS],
+    band:'Rs. 5,000, flat, for the tax year.',
+    sections:[YOU,NON_RES,EXTRA],
     fee:()=>({amt:5000,why:'Non-resident Pakistani — flat fee for the tax year.'}),
     docs:[
-      ['CNIC or NICOP','Front and back'],
+      ['CNIC or NICOP — front and back','A clear phone photo is fine'],
       ['Passport pages with entry and exit stamps','This is what proves your days outside Pakistan'],
-      ['Proof of residence abroad','Iqama, residence permit, work visa or employment letter'],
-      ['Remittance proofs','Bank credit advice or swift copy for money sent to Pakistan'],
-      ['Pakistani bank statement 1 July to 30 June','If you hold an account here'],
-      ['Rent agreement and rent receipts','If you have rental income in Pakistan'],
-      ['Property documents','Registry or allotment letter for property in Pakistan'],
-      ['Last year’s return','If you have filed before'],
-      ['Payment screenshot','Of the service fee, from the bank details below'],
+      ['Proof of residence abroad','Iqama, residence permit, work visa or an employment letter'],
+      ['Remittance proofs','Bank credit advice or SWIFT copy for money you sent to Pakistan'],
+      ['Pakistani bank statement, 1 July to 30 June','If you hold an account here'],
+      ['Property documents','Registry or allotment letter for anything you own in Pakistan'],
+      ['Rent agreement and rent receipts','If you earn rent in Pakistan'],
+      DOC_LAST,
+      DOC_PAY,
     ]},
 };
 
 /* ---------- utils ---------- */
 const $=id=>document.getElementById(id);
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const num=v=>{const x=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));return isNaN(x)?0:x;};
 const pkr=v=>'Rs. '+Math.round(v).toLocaleString('en-PK');
 const bytes=b=>b<1024?b+' B':b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB';
 
@@ -765,9 +695,7 @@ function fieldHTML(f){
     ctrl='<select '+attrs+'><option value="">Select…</option>'+
       f.options.map(o=>'<option value="'+esc(o)+'">'+esc(o)+'</option>').join('')+'</select>';
   }else{
-    const it=f.type==='number'?'text':f.type;
-    const im=f.type==='number'?' inputmode="numeric"':'';
-    ctrl='<input '+attrs+' type="'+it+'"'+im+' placeholder="'+esc(f.ph||'')+'"'+
+    ctrl='<input '+attrs+' type="'+f.type+'" placeholder="'+esc(f.ph||'')+'"'+
          (f.type==='password'?' autocomplete="off"':'')+'>';
   }
   return '<div class="f'+(f.wide||f.type==='textarea'?' wide':'')+hidden+'" data-for="'+f.id+'"'+
@@ -797,8 +725,11 @@ function render(cat){
     '<div class="doc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>'+
     '<span><b>'+esc(d[0])+'</b> — '+esc(d[1])+'</span></div>').join('');
 
+  $('feestrip').innerHTML='<b>'+esc(c.label)+'</b><span>'+esc(c.band)+
+    ' Payable in advance — the account is at the bottom of this form.</span>';
+  $('feestrip').classList.remove('hide');
+
   $('tail').classList.remove('hide');
-  $('meter').classList.remove('hide');
   bindDynamic();
   updateFee();
 }
@@ -810,13 +741,6 @@ function bindDynamic(){
     cn.value=d.length>12?d.slice(0,5)+'-'+d.slice(5,12)+'-'+d.slice(12)
             :d.length>5?d.slice(0,5)+'-'+d.slice(5):d;
   });}
-  document.querySelectorAll('#fields input[inputmode="numeric"]').forEach(el=>{
-    el.addEventListener('blur',()=>{
-      const v=el.value.replace(/[^0-9.\-]/g,'');
-      if(v!=='')el.value=Number(v).toLocaleString('en-PK');
-    });
-    el.addEventListener('focus',()=>{el.value=el.value.replace(/,/g,'');});
-  });
   document.querySelectorAll('#fields [data-showif]').forEach(w=>{
     const src=$(w.dataset.showif);
     if(!src)return;
@@ -837,18 +761,21 @@ function collect(){
   document.querySelectorAll('#fields input,#fields select,#fields textarea').forEach(el=>{
     const w=el.closest('.f');
     if(w&&w.classList.contains('hide'))return;
-    let v=el.value.trim();
-    if(el.getAttribute('inputmode')==='numeric'&&v!=='')v=v.replace(/,/g,'');
-    d[el.name]=v;
+    d[el.name]=el.value.trim();
   });
   return d;
 }
 
 function updateFee(){
   if(!CAT)return;
-  const f=CATS[CAT].fee(collect());
-  $('feeAmt').textContent=pkr(f.amt);
-  $('feeWhy').textContent=f.why+' Payable in advance to the account shown below.';
+  const c=CATS[CAT], d=collect(), decided=c.sections.some(sec=>sec.fields.some(f=>f.fee))
+    ? c.sections.some(sec=>sec.fields.some(f=>f.fee&&d[f.id])) : true;
+  const f=c.fee(d);
+  $('feebox').innerHTML = decided
+    ? '<div><span class="lab">Your fee</span><span class="amt">'+pkr(f.amt)+'</span></div>'+
+      '<span class="why">'+esc(f.why)+'</span>'
+    : '<div><span class="lab">Your fee</span><span class="amt" style="color:var(--dim)">—</span></div>'+
+      '<span class="why">'+esc(c.band)+' Answer that one question above and the exact amount appears here.</span>';
   return f;
 }
 
