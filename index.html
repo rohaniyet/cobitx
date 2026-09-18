@@ -51,6 +51,7 @@
       "foundingDate": "2024",
       "founder": { "@id": "https://cobitx.com/#founder" },
       "owns": [
+        { "@type": "Product", "name": "e-Rice", "url": "https://erice.pk", "description": "Multi-tenant cloud ERP for Pakistani rice mills, traders, exporters and commission agents — purchase, sale, milling, lot-wise stock and a full accounts module." },
         { "@type": "Product", "name": "RoadX", "url": "https://roadx.pk", "description": "Fleet, trip and dispatch management software for Pakistani goods transport companies." },
         { "@type": "Product", "name": "KTrade", "url": "https://ktrade.uk", "description": "Market data pipelines, signal dashboards and trading automation tooling." },
         { "@type": "Product", "name": "Misharfin", "url": "https://misharfin.com", "description": "United Kingdom based perfume brand with its own direct-to-consumer e-commerce platform." }
@@ -358,6 +359,15 @@ p{margin:0}
 @media(min-width:1020px){.nav-links{display:flex}}
 .nav-cta{margin-left:auto}
 .nav-links+.nav-cta{margin-left:0}
+.nav-tax{margin-left:auto;white-space:nowrap;border-color:rgba(62,224,160,.38);
+  color:var(--platinum);background:rgba(62,224,160,.10)}
+.nav-tax:hover{border-color:rgba(62,224,160,.7);background:rgba(62,224,160,.18)}
+.nav-tax svg{width:15px;height:15px;fill:var(--jade);flex:none}
+.nav-links+.nav-tax{margin-left:0}
+.nav-tax+.nav-cta{margin-left:0}
+@media(max-width:640px){.nav .nav-cta{display:none}}
+@media(max-width:440px){.nav .nav-tax .lw{display:none}}
+@media(max-width:380px){.nav .nav-logo{height:27px}.nav .nav-tax{padding:10px 15px;font-size:12.5px}}
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;
@@ -453,7 +463,7 @@ p{margin:0}
 
 /* ── PRODUCTS (proof first) ──────────────────────────────── */
 .prod{display:grid;gap:18px}
-@media(min-width:760px){.prod{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:760px){.prod{grid-template-columns:repeat(2,1fr)}}
 .prod-item{padding:clamp(28px,3vw,36px);display:flex;flex-direction:column}
 .badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;
   letter-spacing:.18em;text-transform:uppercase;padding:6px 12px;border-radius:999px;
@@ -489,6 +499,15 @@ p{margin:0}
 @media(min-width:680px){.rowcard{grid-template-columns:.85fr 1.5fr;gap:26px;align-items:baseline}}
 .rowcard h4{font-size:15.5px;letter-spacing:-.015em}
 .rowcard p{color:var(--titanium);font-size:14.5px}
+.taxcta{margin-top:clamp(34px,4vw,52px);padding:clamp(28px,3.4vw,44px);display:grid;
+  gap:26px;align-items:center;border-color:rgba(62,224,160,.22)}
+@media(min-width:880px){.taxcta{grid-template-columns:1fr auto;gap:44px}}
+.taxcta h3{font-size:clamp(23px,2.7vw,31px);font-weight:700;letter-spacing:-.04em;margin:14px 0 12px}
+.taxcta p{color:var(--titanium);font-size:15px;max-width:60ch}
+.taxcta-act{display:grid;gap:10px;justify-items:start}
+@media(min-width:880px){.taxcta-act{justify-items:center}}
+.taxcta-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim)}
 
 /* ── PROCESS ─────────────────────────────────────────────── */
 .steps{display:grid;gap:16px}
@@ -630,6 +649,9 @@ p{margin:0}
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <a class="btn btn-sm nav-tax" href="/tax-return.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm0 2.5L17.5 8H14zM8 12h8v2H8zm0 4h8v2H8zm0-8h3v2H8z"/></svg>
+      File<span class="lw"> your</span> tax return</a>
     <a class="btn btn-fill btn-sm nav-cta magnetic" href="https://wa.me/923454680844" target="_blank" rel="noopener">Start a project</a>
   </div>
 </header>
@@ -681,12 +703,24 @@ p{margin:0}
     <div class="head rv">
       <span class="eyebrow j">Shipped and running</span>
       <h2>We build for clients. We also build for ourselves.</h2>
-      <p>Three products of our own, live in three different markets. Operating them is where
+      <p>Four products of our own, live in three different markets. Operating them is where
          most of what we know about running software in production came from — the uptime, the
          payments, the support tickets at 2am.</p>
     </div>
 
     <div class="prod">
+      <div class="glass prod-item rv">
+        <span class="badge" style="color:var(--jade)"><s style="background:var(--jade);box-shadow:0 0 10px var(--jade)"></s>Rice ERP · PK · New</span>
+        <h3>e-Rice</h3>
+        <p>Cloud ERP for Pakistan's rice trade — mills, traders, exporters and commission agents.
+           Weighbridge-based purchase and sale, bardana and touch handling, lot-wise stock across
+           many vehicles, milling with automatic yield and process loss, and accounts that run to
+           day book, party ageing, tax registers and a balance sheet. Four subscription tiers,
+           one month free, installable on a phone.</p>
+        <a class="link" href="https://erice.pk" target="_blank" rel="noopener">erice.pk
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2l-4.6-4.6z"/></svg></a>
+      </div>
+
       <div class="glass prod-item rv">
         <span class="badge" style="color:var(--copper)"><s style="background:var(--copper);box-shadow:0 0 10px var(--copper)"></s>Logistics · PK</span>
         <h3>RoadX</h3>
@@ -820,6 +854,20 @@ p{margin:0}
         <div class="glass rowcard rv"><h4>Licensing</h4><p>Punjab Food Authority licensing and documentation for restaurants, bakeries and food manufacturers.</p></div>
         <div class="glass rowcard rv"><h4>Company formation</h4><p>SECP incorporation in Pakistan, plus LLC and Ltd formation in the USA, UK and UAE with post-registration compliance.</p></div>
         <div class="glass rowcard rv"><h4>Advisory</h4><p>Tax reconciliation, notice handling, and structuring advice for businesses moving from unregistered to documented operations.</p></div>
+      </div>
+    </div>
+
+    <div class="glass taxcta rv">
+      <div>
+        <span class="eyebrow j">Tax year 2026 · Open now</span>
+        <h3>File your income tax return online</h3>
+        <p>Salaried, salaried with business income, or a non-resident Pakistani — pick your case,
+           fill one form, attach your documents, and we file it on IRIS for you. Fees start at
+           Rs. 2,000.</p>
+      </div>
+      <div class="taxcta-act">
+        <a class="btn btn-fill magnetic" href="/tax-return.html">File your tax return</a>
+        <span class="taxcta-note">Takes about 5 minutes</span>
       </div>
     </div>
   </section>
@@ -961,11 +1009,13 @@ p{margin:0}
       <div>
         <h5>Products</h5>
         <div class="fl">
+          <a href="https://erice.pk" target="_blank" rel="noopener">e-Rice.pk</a>
           <a href="https://roadx.pk" target="_blank" rel="noopener">RoadX.pk</a>
           <a href="https://ktrade.uk" target="_blank" rel="noopener">KTrade.uk</a>
           <a href="https://misharfin.com" target="_blank" rel="noopener">Misharfin.com</a>
           <a href="#systems">Custom ERP development</a>
           <a href="#compliance">FBR tax filing</a>
+          <a href="/tax-return.html">File your tax return</a>
         </div>
       </div>
 

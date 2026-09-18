@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Filhal sirf homepage hai. Jaise jaise service pages banain
-  (/erp-software-pakistan/, /rice-mill-software/, /transport-erp/,
-   /school-management-system/, /fbr-tax-filing/, /company-formation/),
-  har page ka <url> block yahan add karte jayen aur lastmod update karen.
+  Jaise jaise aur service pages banain (/rice-mill-software/, /transport-erp/,
+  /school-management-system/, /company-formation/), har page ka <url> block
+  yahan add karte jayen aur lastmod update karen.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cobitx.com/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cobitx.com/tax-return.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
