@@ -89,9 +89,9 @@ img,svg{display:block;max-width:100%}
   border-bottom:1px solid var(--edge)}
 .nav-in{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);
   display:flex;align-items:center;gap:14px}
-.nav-logo{height:30px;width:auto}
-.wordmark{font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.05em}
-.wordmark i{color:var(--copper);font-style:normal}
+.wordmark{font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:-.02em;line-height:1;color:#fff}
+.wordmark i{font-style:normal;background:linear-gradient(90deg,var(--copper),var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .nav-back{margin-left:auto;font-size:13.5px;color:var(--titanium);display:inline-flex;
   align-items:center;gap:7px;padding:8px 14px;border-radius:999px;transition:.3s}
 .nav-back:hover{color:var(--platinum);background:rgba(255,255,255,.07)}
@@ -302,8 +302,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 <header class="nav">
   <div class="nav-in">
     <a class="brand" href="/" aria-label="Cobitx Technologies home">
-      <img src="logo.png" alt="Cobitx Technologies" class="nav-logo" width="124" height="30"
-           onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',innerHTML:'COBIT<i>X</i>'}))">
+      <span class="wordmark">COBIT<i>X</i></span>
     </a>
     <a class="nav-back" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5l-7 7 7 7 1.4-1.4L7.8 13H20v-2H7.8l4.6-4.6z"/></svg><span>Back to site</span></a>
     <a class="nav-wa" href="https://wa.me/923454680844?text=Assalam%20o%20Alaikum%2C%20I%20need%20help%20filing%20my%20tax%20return" target="_blank" rel="noopener">
