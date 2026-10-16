@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#070809">
 
 <title>File Your Income Tax Return Online — Pakistan | Cobitx Technologies</title>
-<meta name="description" content="File your FBR income tax return for tax year 2026 online. Salaried persons from Rs. 2,000, salaried with business income from Rs. 5,000, non-resident Pakistanis Rs. 5,000. Due date 30 September; the section 182A late-filing surcharge is now Rs. 25,000. Fill one form, attach your documents, and Cobitx Technologies files it on IRIS for you.">
+<meta name="description" content="File your FBR income tax return for tax year 2026 online. Salaried persons from Rs. 2,000, salaried with business income from Rs. 5,000, non-resident Pakistanis Rs. 5,000. Due date extended by FBR to 31 October 2026; the section 182A late-filing surcharge is now Rs. 25,000. Fill one form, attach your documents, and Cobitx Technologies files it on IRIS for you.">
 <meta name="author" content="Syed Waqas Asim">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://cobitx.com/tax-return.html">
@@ -154,7 +154,8 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 .opt .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--gold);display:block;margin-top:9px}
 
-.fsec{margin-top:34px;padding-top:26px;border-top:1px solid var(--edge)}
+.fsec{margin-top:34px;padding-top:26px;border-top:1px solid var(--edge);scroll-margin-top:96px}
+#fields{scroll-margin-top:96px}
 .fsec:first-of-type{border-top:0;padding-top:0}
 .fsec>h3{font-size:17px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
 .fsec>h3 .n{font-family:var(--mono);font-size:11px;color:var(--copper);
@@ -167,7 +168,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 .f.wide{grid-column:1/-1}
 .f label{font-size:12.5px;font-weight:600;letter-spacing:.01em;color:var(--platinum)}
 .f label .req{color:var(--copper)}
-.f .tip{font-size:11.5px;color:var(--dim);font-weight:400;line-height:1.45;margin-top:-3px}
+.f .tip{font-size:11.5px;color:var(--dim);font-weight:400;line-height:1.45}
 .f input,.f select,.f textarea{
   font-family:var(--body);font-size:14.5px;color:var(--platinum);width:100%;
   background:rgba(255,255,255,.04);border:1px solid var(--edge);border-radius:11px;
@@ -210,14 +211,21 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 .doc b{color:var(--platinum);font-weight:600}
 
 /* dropzone */
-.drop{border:1.5px dashed rgba(255,255,255,.2);border-radius:14px;padding:26px 20px;
-  text-align:center;cursor:pointer;transition:.3s;background:rgba(255,255,255,.02)}
-.drop:hover,.drop.over{border-color:rgba(255,148,54,.6);background:rgba(255,148,54,.06)}
-.drop svg{width:28px;height:28px;fill:var(--copper);margin:0 auto 10px}
-.drop b{display:block;font-size:14.5px;margin-bottom:4px}
-.drop span{font-size:12.5px;color:var(--dim)}
-.drop input{display:none}
+.drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;width:100%;min-height:168px;margin-top:16px;padding:26px 20px;text-align:center;
+  border:1.5px dashed rgba(255,255,255,.22);border-radius:14px;background:rgba(255,255,255,.025);
+  cursor:pointer;transition:border-color .3s,background .3s}
+.drop:hover,.drop.over,.drop:focus-within{border-color:rgba(255,148,54,.65);background:rgba(255,148,54,.06)}
+.drop .ico{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;margin-bottom:4px;
+  background:rgba(255,148,54,.12);border:1px solid rgba(255,148,54,.3)}
+.drop .ico svg{width:24px;height:24px;fill:var(--copper)}
+.drop b{font-size:15px;font-weight:600;color:var(--platinum)}
+.drop .pick{display:inline-flex;align-items:center;margin-top:6px;padding:9px 20px;border-radius:999px;
+  font-size:13px;font-weight:600;color:#14100A;background:linear-gradient(105deg,var(--gold),var(--copper))}
+.drop .lim{font-size:12px;color:var(--dim);line-height:1.5}
+.drop input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 .filelist{display:grid;gap:7px;margin-top:12px}
+.filelist:empty{display:none}
 .file{display:flex;align-items:center;gap:10px;font-size:13px;padding:9px 12px;
   border-radius:9px;background:rgba(255,255,255,.04);border:1px solid var(--edge)}
 .file .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -242,6 +250,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
 .chk{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--titanium);
   line-height:1.55;cursor:pointer}
 .chk input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:#FF9436;cursor:pointer}
+.f label.chk{font-size:13.5px;font-weight:400;letter-spacing:0;color:var(--titanium)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;
   padding:15px 30px;font-size:15px;font-weight:600;font-family:var(--body);border:1px solid transparent;
   cursor:pointer;transition:.35s var(--ease)}
@@ -311,8 +320,8 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
   <p class="lede">Pick your case, answer a few short questions and attach your documents — we read
      the figures off the documents ourselves. We prepare the computation, file the return and the
      wealth statement on FBR IRIS, and send you the acknowledgement and the updated Active Taxpayer
-     status. No office visit, no agent in between. Due date for tax year 2026 is
-     <strong style="color:var(--gold)">30 September</strong>.</p>
+     status. No office visit, no agent in between. FBR has extended the due date for tax year
+     2026 to <strong style="color:var(--gold)">31 October 2026</strong>.</p>
 </section>
 
 <!-- ══════════ FEES ══════════ -->
@@ -353,7 +362,7 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
       Under section 182A the surcharge for getting back onto the Active Taxpayer List after the
       due date is Rs. 25,000 for an individual, Rs. 50,000 for an AOP and Rs. 100,000 for a
       company — it was Rs. 1,000 before the Finance Act 2026 raised it. Filing by
-      <strong>30 September</strong> avoids it completely, and costs far less than the surcharge alone.
+      <strong>31 October 2026</strong> avoids it completely, and costs far less than the surcharge alone.
     </div>
   </div>
 </section>
@@ -416,9 +425,11 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
           <div class="docs" id="doclist"></div>
           <label class="drop" id="drop">
             <input type="file" id="files" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.xls,.xlsx,.doc,.docx,.csv">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96M14 13v4h-4v-4H7l5-5 5 5z"/></svg>
-            <b>Tap to choose files, or drag them here</b>
-            <span>Up to 18 MB in total. You can add them one by one.</span>
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96M14 13v4h-4v-4H7l5-5 5 5z"/></svg></span>
+            <b>Upload your documents</b>
+            <span class="lim">Drag files here, or tap the button below</span>
+            <span class="pick">Choose files</span>
+            <span class="lim">PDF, JPG, PNG, Excel or Word · up to 18 MB in total · add as many times as you need</span>
           </label>
           <div class="filelist" id="filelist"></div>
         </div>
@@ -494,8 +505,9 @@ h1{font-size:clamp(33px,6vw,60px);font-weight:700;margin-bottom:18px}
   <h2 class="h2">Common questions</h2>
   <div class="glass" style="padding:clamp(18px,3vw,30px)">
     <details open><summary>What is the last date to file?</summary>
-      <p>For individuals, including salaried persons, the statutory due date is 30 September
-         following the tax year, unless FBR extends it. Filing after the due date still gets you
+      <p>For tax year 2026, FBR has extended the last date to <strong>31 October 2026</strong>.
+         The normal statutory due date for individuals, including salaried persons, is 30 September
+         following the tax year; FBR extends it by notification. Filing after the due date still gets you
          on the Active Taxpayer List, but only after paying the section 182A surcharge, which the
          Finance Act 2026 raised from Rs. 1,000 to <strong>Rs. 25,000</strong> for an individual
          (Rs. 50,000 for an AOP, Rs. 100,000 for a company). On top of that, a non-filer pays
@@ -561,10 +573,10 @@ const YEARS=['2026 (1 Jul 2025 – 30 Jun 2026)','2025 (1 Jul 2024 – 30 Jun 20
 const YOU={title:'About you',
   hint:'Only what is needed to find you on IRIS and reach you. Everything else we read from your documents.',
   fields:[
-    t('name','Full name (as on CNIC)',{req:true,ph:'Syed Waqas Asim'}),
-    t('cnic','CNIC number',{req:true,ph:'35202-1234567-1'}),
-    t('mobile','WhatsApp number',{req:true,ph:'0345 4680844',tip:'Your computation and updates come here'}),
-    t('email','Email address',{type:'email',req:true,ph:'you@example.com'}),
+    t('name','Full name (as on CNIC)',{req:true,ph:'As written on your CNIC',ac:'name'}),
+    t('cnic','CNIC number',{req:true,ph:'35202-1234567-1',im:'numeric'}),
+    t('mobile','WhatsApp number',{type:'tel',req:true,ph:'03XX XXXXXXX',ac:'tel',tip:'Your computation and updates come here'}),
+    t('email','Email address',{type:'email',req:true,ph:'you@example.com',ac:'email'}),
     s_('taxyear','Tax year to file',YEARS,{req:true}),
     s_('fbr_registered','Are you already registered with FBR?',
        ['Yes — I have an NTN','No — please register me first'],{req:true}),
@@ -687,7 +699,8 @@ function fieldHTML(f){
   const req=f.req?' <span class="req">*</span>':'';
   const tip=f.tip?'<span class="tip">'+esc(f.tip)+'</span>':'';
   const hidden=f.showIf?' hide':'';
-  const attrs='id="'+f.id+'" name="'+f.id+'"'+(f.req?' data-req="1"':'')+(f.fee?' data-fee="1"':'');
+  const attrs='id="'+f.id+'" name="'+f.id+'"'+(f.req?' data-req="1"':'')+(f.fee?' data-fee="1"':'')+
+              (f.ac?' autocomplete="'+f.ac+'"':'')+(f.im?' inputmode="'+f.im+'"':'');
   let ctrl;
   if(f.type==='textarea'){
     ctrl='<textarea '+attrs+' rows="3" placeholder="'+esc(f.ph||'')+'"></textarea>';
@@ -700,7 +713,7 @@ function fieldHTML(f){
   }
   return '<div class="f'+(f.wide||f.type==='textarea'?' wide':'')+hidden+'" data-for="'+f.id+'"'+
          (f.showIf?' data-showif="'+esc(f.showIf[0])+'" data-showval="'+esc(f.showIf[1])+'"':'')+'>'+
-         '<label for="'+f.id+'">'+esc(f.label)+req+'</label>'+tip+ctrl+
+         '<label for="'+f.id+'">'+esc(f.label)+req+'</label>'+ctrl+tip+
          '<span class="msg">This one is needed</span></div>';
 }
 
